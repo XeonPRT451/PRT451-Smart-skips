@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("cdu.xeon.smartskips", appContext.packageName)
+        assertEquals("cdu.xeon.cdu.xeon.basic_common", appContext.packageName)
     }
 }

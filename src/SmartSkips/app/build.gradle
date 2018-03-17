@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "cdu.xeon.smartskips"
+        applicationId "cdu.xeon.cdu.xeon.basic_common"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
