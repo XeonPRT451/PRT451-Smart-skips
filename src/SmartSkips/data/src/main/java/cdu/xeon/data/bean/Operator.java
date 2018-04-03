@@ -22,7 +22,7 @@ public class Operator {
     @DatabaseField(columnName = "gender")
     private int gender;
 
-    @DatabaseField(canBeNull = false, foreign = true, columnName = "landfill_id")
+    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true,columnName = "landfill_id")
     private Landfill landfill;
 
     public Operator() {

@@ -33,8 +33,8 @@ public class Skip {
     @DatabaseField(columnName = "capacity")
      private double capacity;
 
-    @DatabaseField(columnName = "current_weight")
-    private double currentWeight;
+    @DatabaseField(columnName = "current_capacity")
+    private double currentCapacity;
 
      @DatabaseField(canBeNull = true, foreign = true, columnName = "driver_id")
      private Driver driver;
@@ -48,7 +48,23 @@ public class Skip {
          this.location = location;
      }
 
-     public Driver getDriver() {
+    public double getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(double capacity) {
+        this.capacity = capacity;
+    }
+
+    public double getCurrentCapacity() {
+        return currentCapacity;
+    }
+
+    public void setCurrentCapacity(double currentCapacity) {
+        this.currentCapacity = currentCapacity;
+    }
+
+    public Driver getDriver() {
          return driver;
      }
 

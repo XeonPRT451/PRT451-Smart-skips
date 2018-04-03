@@ -1,5 +1,6 @@
 package cdu.xeon.data.bean;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -16,6 +17,9 @@ public class Landfill {
     @DatabaseField(columnName = "name")
     private String name;
 
+    @DatabaseField(columnName = "address")
+    private String address;
+
     @DatabaseField(columnName = "gwcapacity")
     private double GWCapacity;
 
@@ -29,10 +33,8 @@ public class Landfill {
     private double currentCWCapacity;
 
     @ForeignCollectionField(eager = false)
-    private Operator operator;
+    private ForeignCollection<Operator> operators;
 
-    public Landfill() {
-    }
 
     public int getId() {
         return id;
@@ -48,6 +50,14 @@ public class Landfill {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public double getGWCapacity() {
@@ -82,11 +92,11 @@ public class Landfill {
         this.currentCWCapacity = currentCWCapacity;
     }
 
-    public Operator getOperator() {
-        return operator;
+    public ForeignCollection<Operator> getOperators() {
+        return operators;
     }
 
-    public void setOperator(Operator operator) {
-        this.operator = operator;
+    public void setOperators(ForeignCollection<Operator> operators) {
+        this.operators = operators;
     }
 }
