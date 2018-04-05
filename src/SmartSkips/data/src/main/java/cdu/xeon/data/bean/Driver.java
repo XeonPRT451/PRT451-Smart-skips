@@ -16,6 +16,10 @@ public class Driver {
 
     @DatabaseField(columnName = "name")
     private String name;
+
+    @DatabaseField(columnName = "password")
+    private String password;
+
     public static final int MALE =0;
     public static final int FEMALE =1;
     //male:0   female:1
@@ -45,6 +49,14 @@ public class Driver {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getGender() {
