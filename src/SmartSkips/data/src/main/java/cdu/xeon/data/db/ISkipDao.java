@@ -5,4 +5,6 @@ package cdu.xeon.data.db;
  */
 
 public interface ISkipDao {
+
+
 }

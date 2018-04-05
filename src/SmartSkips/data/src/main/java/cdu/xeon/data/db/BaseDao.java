@@ -24,7 +24,7 @@ public abstract class BaseDao<T, Integer> implements IBaseDao<T, Integer> {
 
     protected DatabaseHelper mDatabaseHelper;
 
-    //helper
+
     protected Context mContext;
 
 
@@ -414,7 +414,7 @@ public abstract class BaseDao<T, Integer> implements IBaseDao<T, Integer> {
      * @throws SQLException SQLException
      */
     public List<T> query(String[] columnNames, Object[] columnValues) throws SQLException {
-        if (columnNames.length != columnNames.length) {
+        if (columnNames.length != columnValues.length) {
             throw new InvalidParameterException("params size is not equal");
         }
         QueryBuilder<T, Integer> queryBuilder = getDao().queryBuilder();

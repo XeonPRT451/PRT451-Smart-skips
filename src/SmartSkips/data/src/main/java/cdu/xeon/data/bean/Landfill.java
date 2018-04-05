@@ -35,6 +35,8 @@ public class Landfill {
     @ForeignCollectionField(eager = false)
     private ForeignCollection<Operator> operators;
 
+    public Landfill() {
+    }
 
     public int getId() {
         return id;

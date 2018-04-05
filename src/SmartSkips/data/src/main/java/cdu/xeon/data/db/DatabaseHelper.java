@@ -23,7 +23,7 @@ import cdu.xeon.data.bean.Skip;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String TABLE_NAME = "xeon-smartskips.db";
 
-    private Map<String, Dao> daos = new HashMap<String, Dao>();
+
 
             private DatabaseHelper(Context context)
    {
@@ -73,7 +73,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
       */
             public static synchronized DatabaseHelper getHelper(Context context)
     {
-                context = context.getApplicationContext();
+
                if (instance == null)
                     {
                         synchronized (DatabaseHelper.class)
@@ -86,36 +86,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                 return instance;
            }
 
-            public synchronized Dao getDao(Class clazz) throws SQLException
-   {
-                Dao dao = null;
-                String className = clazz.getSimpleName();
 
-                if (daos.containsKey(className))
-                    {
-                        dao = daos.get(className);
-                    }
-               if (dao == null)
-                    {
-                        dao = super.getDao(clazz);
-                        daos.put(className, dao);
-                    }
-               return dao;
-            }
-
-            /**
- .     * release resources
- .     */
-           @Override
-    public void close()
-    {
-               super.close();
-
-                for (String key : daos.keySet())
-                    {
-                        Dao dao = daos.get(key);
-                        dao = null;
-                  }
-            }
 
 }
