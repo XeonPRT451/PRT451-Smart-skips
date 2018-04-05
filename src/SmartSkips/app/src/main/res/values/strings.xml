@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Smart Skips</string>
+    <string name="title_activity_skip_details">skipDetails</string>
 </resources>
