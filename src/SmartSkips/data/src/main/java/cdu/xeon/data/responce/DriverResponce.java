@@ -16,9 +16,7 @@ public class DriverResponce {
     public Driver wrapper(){   //转化成自己的model
 
         Driver driver=new Driver();
-        driver.setName(name);
-        driver.setLocation(location);
-        driver.setGender(gender);
+        driver.setUsername(name);
 
         //TODO
         return driver;
