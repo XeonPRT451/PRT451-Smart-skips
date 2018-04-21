@@ -47,4 +47,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.2.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.2.0'
 
+    //google play services
+    implementation 'com.google.android.gms:play-services-plus:15.0.0'
+    implementation 'com.google.android.gms:play-services-maps:15.0.0'
+    implementation 'com.google.android.gms:play-services-places:15.0.0'
+    implementation 'com.google.android.gms:play-services-base:15.0.0'
+
 }
