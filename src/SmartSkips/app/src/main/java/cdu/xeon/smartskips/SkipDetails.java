@@ -14,6 +14,7 @@ public class SkipDetails extends AppCompatActivity {
 
 
         findViewById(R.id.GoToMap).setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 startActivity(new Intent(SkipDetails.this,MapPageActivity.class));
             }
