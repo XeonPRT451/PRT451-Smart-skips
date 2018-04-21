@@ -23,8 +23,6 @@ import cdu.xeon.data.bean.Skip;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String TABLE_NAME = "xeon-smartskips.db";
 
-
-
             private DatabaseHelper(Context context)
    {
                super(context, TABLE_NAME, null, 1);
