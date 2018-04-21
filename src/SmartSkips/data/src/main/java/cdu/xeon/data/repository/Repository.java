@@ -49,7 +49,7 @@ public class Repository {
        String json= WebServiceGet.executeHttpGet(command);
        System.out.println(json);
         **/
-       String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/data/src/main/res/json/driver.txt");
+       String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/driver.txt");
        Driver d = (Driver) JsonUtil.json2obj(json,Driver.class);
        return d;
    }
