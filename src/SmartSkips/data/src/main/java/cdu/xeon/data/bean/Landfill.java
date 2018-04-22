@@ -5,12 +5,14 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2/04/2018.
  */
 
 @DatabaseTable(tableName = "tb_landfill")
-public class Landfill {
+public class Landfill implements Serializable {
     @DatabaseField(generatedId = true)
     private int id;
 
@@ -23,17 +25,17 @@ public class Landfill {
     @DatabaseField(columnName = "gwcapacity")
     private double GWCapacity;
 
-    @DatabaseField(columnName = "current_gwcapacity")
+    @DatabaseField(columnName = "current_GWCapacity")
     private double currentGWCapacity;
 
     @DatabaseField(columnName = "cwcapacity")
     private double CWCapacity;
 
-    @DatabaseField(columnName = "current_cwcapacity")
+    @DatabaseField(columnName = "current_CWCapacity")
     private double currentCWCapacity;
 
-    @ForeignCollectionField(eager = false)
-    private ForeignCollection<Operator> operators;
+    @DatabaseField(columnName = "status")
+    private int status;
 
     public Landfill() {
     }
@@ -94,11 +96,25 @@ public class Landfill {
         this.currentCWCapacity = currentCWCapacity;
     }
 
-    public ForeignCollection<Operator> getOperators() {
-        return operators;
+    public int getStatus() {
+        return status;
     }
 
-    public void setOperators(ForeignCollection<Operator> operators) {
-        this.operators = operators;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Landfill{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", GWCapacity=" + GWCapacity +
+                ", currentGWCapacity=" + currentGWCapacity +
+                ", CWCapacity=" + CWCapacity +
+                ", currentCWCapacity=" + currentCWCapacity +
+                ", status=" + status +
+                '}';
     }
 }

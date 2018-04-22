@@ -1,0 +1,1 @@
+{"size":15,"offset":0,"total":2,"datas":[{"id":1,"username":"admin1","nickname":"admin1","email":"admin1@admin.com","phone":"110","status":1,"onduty":1,"createDate":1536503400000,"landfill":null,"lname":null},{"id":2,"username":"admin2","nickname":"admin2","email":"admin2@admin.com","phone":"110","status":1,"onduty":1,"createDate":1536503400000,"landfill":null,"lname":null}]}

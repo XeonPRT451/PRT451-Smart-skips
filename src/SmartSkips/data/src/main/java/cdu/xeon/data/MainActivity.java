@@ -12,8 +12,14 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import cdu.xeon.data.bean.Driver;
+import cdu.xeon.data.repository.Repository;
+
 
 public class MainActivity extends AppCompatActivity {
+
+
+
 
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
@@ -26,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 //        if(isServiceOK()){
 //            init();
 //        }
+        Driver d= Repository.getDriverDetails();
     }
 
 //    private void init(){

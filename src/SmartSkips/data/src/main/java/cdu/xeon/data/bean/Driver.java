@@ -3,6 +3,7 @@ package cdu.xeon.data.bean;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
 
 
 @DatabaseTable(tableName = "tb_driver")
-public class Driver {
+public class Driver implements Serializable{
 
     @DatabaseField(generatedId = true)
     private int id;

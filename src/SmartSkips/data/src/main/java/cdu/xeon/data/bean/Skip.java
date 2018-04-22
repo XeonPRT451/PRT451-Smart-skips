@@ -3,6 +3,8 @@ package cdu.xeon.data.bean;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2/04/2018.
  */
@@ -10,7 +12,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 
  @DatabaseTable(tableName = "tb_skip")
-public class Skip {
+public class Skip implements Serializable {
       @DatabaseField(generatedId = true)
  private int id;
         @DatabaseField(columnName = "name")
