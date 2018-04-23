@@ -84,7 +84,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
     }
-
+/**
     private void initMap(){
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager().findFragmentById(R.id);
@@ -95,7 +95,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
 
 
 
-
+**/
 
 
 
@@ -160,7 +160,9 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                     Log.d(TAG, "onRequestPermissionsResult: permission granted");
                     mLocationPermissionsGranted = true;
                     //initialize our map
-                    initMap();
+                    /** initMap();
+
+                     */
                 }
             }
         }
