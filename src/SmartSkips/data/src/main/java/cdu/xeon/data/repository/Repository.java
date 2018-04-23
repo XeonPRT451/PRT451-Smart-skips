@@ -22,16 +22,15 @@ public class Repository {
 
     public static void main(String[] args) {
 
-        Context context= App.getContext();
-        InputStream input = context.getResources().openRawResource(R.raw.landfill);
-        System.out.println(input);
+
+        //System.out.println(getSkip().toString());
     }
 
     private static String txt2string(String filePath) {
         BufferedReader br = null;
         StringBuffer sb = null;
         try {
-            br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath))); //这里可以控制编码
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
             sb = new StringBuffer();
             String line = null;
             while ((line = br.readLine()) != null) {
@@ -47,7 +46,7 @@ public class Repository {
             }
         }
 
-        String data = new String(sb); //StringBuffer ==> String
+        String data = new String(sb);
        return data;
 
 
@@ -113,29 +112,37 @@ public class Repository {
        return pl;
    }
 
-    public static Pager<Operator> getOperator(int lid){
+    public static Pager<Operator> getOperator(Context context,int lid){
         /**String command = "/smartskips/operator/mobileList?lid="+lid;
          String json= WebServiceGet.executeHttpGet(command);
          System.out.println(json);
          **/
         if(lid==1) {
-            String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/operator.txt");
+            //String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/operator.txt");
+            InputStream input = context.getResources().openRawResource(R.raw.operator);
+            String json=txt2string(input);
             Pager<Operator> po = (Pager<Operator>) JsonUtil.json2obj(json, Pager.class);
             return po;
         }
         return null;
     }
-/**
-    public static Pager<Skip> getSkip(){
-        /**String command = "/smartskips/landfill/mobileList?lid=1";
+
+    public static Pager<Skip> getSkip(Context context){
+        /**  String command = "/smartskips/skip/mobileList";
          String json= WebServiceGet.executeHttpGet(command);
          System.out.println(json);
 
-        String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/landfill.txt");
-        Pager<Landfill> pl=(Pager<Landfill>)JsonUtil.json2obj(json,Pager.class);
-        return pl;
+         **/
+
+
+       // String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/skip.txt");
+        InputStream input = context.getResources().openRawResource(R.raw.skip);
+        String json=txt2string(input);
+
+        Pager<Skip> ps=(Pager<Skip>)JsonUtil.json2obj(json,Pager.class);
+        return ps;
     }
-    **/
+
 
 }
 

@@ -26,6 +26,9 @@ public class Skip implements Serializable {
      @DatabaseField(columnName = "full")
     private int full;
 
+    @DatabaseField(columnName = "status")
+     private int status;
+
      public static final int GENERAL_WASTE =0;
      public static final int CONSTRUCTION_WASTE =1;
      //  0:general waste 1:construction waste
@@ -40,6 +43,9 @@ public class Skip implements Serializable {
 
      @DatabaseField(canBeNull = true, foreign = true, columnName = "driver_id")
      private Driver driver;
+
+    @DatabaseField(columnName = "dname")
+     private String dname;
      public Skip()
      {
      }
@@ -122,4 +128,35 @@ public class Skip implements Serializable {
                 this.location = location;
             }
 
-        }
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getDname() {
+        return dname;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname;
+    }
+
+    @Override
+    public String toString() {
+        return "Skip{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", full=" + full +
+                ", status=" + status +
+                ", type=" + type +
+                ", capacity=" + capacity +
+                ", currentCapacity=" + currentCapacity +
+                ", driver=" + driver +
+                ", dname='" + dname + '\'' +
+                '}';
+    }
+}

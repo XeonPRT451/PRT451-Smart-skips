@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 //        if(isServiceOK()){
 //            init();
 //        }
-        Driver d= Repository.getDriverDetails();
+
     }
 
 //    private void init(){
