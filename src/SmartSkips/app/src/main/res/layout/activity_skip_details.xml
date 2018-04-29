@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
         android:text="Skip Details"
         android:textSize="30dp"
         android:textStyle="bold|italic"
@@ -85,26 +84,27 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
-        android:text="Empty Now"
         android:background="#f03"
+        android:text="Empty Now"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/GoToMap"
+        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.28" />
 
     <Button
         android:id="@+id/GoToMap"
         android:layout_width="88dp"
         android:layout_height="51dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginRight="72dp"
         android:layout_marginTop="44dp"
-        android:text="Cancel"
         android:background="#03C8BB"
+        android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.28" />
 </android.support.constraint.ConstraintLayout>
