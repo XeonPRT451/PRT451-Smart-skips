@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cdu.xeon.smartskips.SkipDetails">
+    tools:context="cdu.xeon.smartskips.SkipDetails"
+    android:background="@drawable/bg">
 
     <ImageView
         android:id="@+id/imageView"
@@ -19,8 +20,8 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.045"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintVertical_bias="0.153"
+        app:srcCompat="@drawable/logo1" />
 
     <TextView
         android:id="@+id/textView3"
@@ -31,6 +32,7 @@
         android:layout_marginTop="40dp"
         android:text="Skip Details"
         android:textSize="30dp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -84,6 +86,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
         android:text="Empty Now"
+        android:background="#f03"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/GoToMap"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,6 +102,7 @@
         android:layout_marginRight="64dp"
         android:layout_marginTop="44dp"
         android:text="Cancel"
+        android:background="#03C8BB"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
