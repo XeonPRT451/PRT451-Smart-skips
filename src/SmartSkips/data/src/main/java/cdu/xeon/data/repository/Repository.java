@@ -88,12 +88,12 @@ public class Repository {
    }
 
    public static Driver getDriverDetails(Context context){
-       /**String command = "/smartskips/driver/mobileLogin?username=admin1&password=123";
-       String json= WebServiceGet.executeHttpGet(command);
-       System.out.println(json);
-        **/
-     //  String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/driver.txt");
-       InputStream input = context.getResources().openRawResource(R.raw.driver);
+      // String command = "/smartskips/driver/mobileLogin?username=admin1&password=123";
+       //String json= WebServiceGet.executeHttpGet(command);
+       //System.out.println(json);
+
+       //String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/driver.txt");
+        InputStream input = context.getResources().openRawResource(R.raw.driver);
        String json=txt2string(input);
        Driver d = (Driver) JsonUtil.json2obj(json,Driver.class);
        return d;
@@ -127,7 +127,7 @@ public class Repository {
         return null;
     }
 
-    public static Pager<Skip> getSkip(Context context){
+    public static Pager<Skip> getSkip(){
         /**  String command = "/smartskips/skip/mobileList";
          String json= WebServiceGet.executeHttpGet(command);
          System.out.println(json);
@@ -135,14 +135,21 @@ public class Repository {
          **/
 
 
-       // String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/skip.txt");
-        InputStream input = context.getResources().openRawResource(R.raw.skip);
-        String json=txt2string(input);
+       String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/skip.txt");
+        //InputStream input = context.getResources().openRawResource(R.raw.skip);
+        //String json=txt2string(input);
 
         Pager<Skip> ps=(Pager<Skip>)JsonUtil.json2obj(json,Pager.class);
         return ps;
     }
 
+    public static String updateDriver(Driver d,int sid){
+        String dj=JsonUtil.obj2json(d);
+        String command="/smartskips/driver/mobileUpdate?driver="+dj+"&sid="+sid;
+      System.out.println(command);
+        String result= WebServiceGet.executeHttpGet(command);
+        return  result;
+    }
 
 }
 

@@ -48,7 +48,7 @@ public class JsonUtil {
 
     }
 
-    public String obj2json(Object obj) {
+    public static String obj2json(Object obj) {
         try{
 
                          Gson gson = new Gson();

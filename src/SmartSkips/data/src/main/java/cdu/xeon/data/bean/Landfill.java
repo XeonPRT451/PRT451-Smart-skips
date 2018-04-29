@@ -37,6 +37,12 @@ public class Landfill implements Serializable {
     @DatabaseField(columnName = "status")
     private int status;
 
+    @DatabaseField(columnName = "longitudes")
+    private double longitude;
+
+    @DatabaseField(columnName = "latitude")
+    private double latitude;
+
     public Landfill() {
     }
 
@@ -104,6 +110,22 @@ public class Landfill implements Serializable {
         this.status = status;
     }
 
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
     @Override
     public String toString() {
         return "Landfill{" +
@@ -115,6 +137,9 @@ public class Landfill implements Serializable {
                 ", CWCapacity=" + CWCapacity +
                 ", currentCWCapacity=" + currentCWCapacity +
                 ", status=" + status +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
                 '}';
     }
+
 }

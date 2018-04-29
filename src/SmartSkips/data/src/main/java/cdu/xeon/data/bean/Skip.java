@@ -41,6 +41,12 @@ public class Skip implements Serializable {
     @DatabaseField(columnName = "current_capacity")
     private double currentCapacity;
 
+    @DatabaseField(columnName = "longitudes")
+    private double longitude;
+
+    @DatabaseField(columnName = "latitude")
+    private double latitude;
+
      @DatabaseField(canBeNull = true, foreign = true, columnName = "driver_id")
      private Driver driver;
 
@@ -144,6 +150,22 @@ public class Skip implements Serializable {
         this.dname = dname;
     }
 
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
     @Override
     public String toString() {
         return "Skip{" +
@@ -155,6 +177,8 @@ public class Skip implements Serializable {
                 ", type=" + type +
                 ", capacity=" + capacity +
                 ", currentCapacity=" + currentCapacity +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
                 ", driver=" + driver +
                 ", dname='" + dname + '\'' +
                 '}';
