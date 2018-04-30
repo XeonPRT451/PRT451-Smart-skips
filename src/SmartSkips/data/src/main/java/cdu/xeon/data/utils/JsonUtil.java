@@ -4,14 +4,18 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JsonUtil {
@@ -74,5 +78,18 @@ public class JsonUtil {
                return null;
             }
 
+
+    public static <T> List<T> jsonToBeanList(String json, Class<T> t) {
+
+        Gson gson = getGson();
+        List<T> list = new ArrayList<>();
+
+        JsonParser parser = new JsonParser();
+        JsonArray jsonarray = parser.parse(json).getAsJsonArray();
+        for (JsonElement element : jsonarray) {
+            list.add(gson.fromJson(element, t));
+        }
+        return list;
+    }
 
 }

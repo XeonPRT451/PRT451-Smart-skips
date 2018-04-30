@@ -144,6 +144,7 @@ public class Repository {
        String json=txt2string(input);
 
        Pager<Landfill> pl=(Pager<Landfill>)JsonUtil.json2obj(json,Pager.class);
+       List<Landfill> ll=pl.getDatas();
        return pl;
    }
 
@@ -170,12 +171,12 @@ public class Repository {
          **/
 
 
-      // String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/skip.txt");
-        InputStream input = context.getResources().openRawResource(R.raw.skip);
+     // String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/skip.txt");
+       InputStream input = context.getResources().openRawResource(R.raw.skip);
         String json=txt2string(input);
 
-        Pager<Skip> ps=(Pager<Skip>)JsonUtil.json2obj(json,Pager.class);
-        List<Skip> ls=ps.getDatas();
+        List<Skip> ls=(List<Skip>)JsonUtil.jsonToBeanList(json,Skip.class);
+
         return ls;
     }
 

@@ -1,7 +1,10 @@
 package cdu.xeon.data;
 import org.junit.Test;
 
+import java.util.List;
+
 import cdu.xeon.data.bean.Driver;
+import cdu.xeon.data.bean.Skip;
 import cdu.xeon.data.repository.Repository;
 
 public class TestRepository {
@@ -14,6 +17,12 @@ public class TestRepository {
 //    @Test
 //    public void testGetSkip(){
 //        System.out.println(Repository.getSkip());
+//    }
+
+//    @Test
+//    public void testGetSkip(){
+//        List<Skip> ls=Repository.getSkip();
+//        System.out.println(ls.get(1).getLatitude());
 //    }
 
     @Test
