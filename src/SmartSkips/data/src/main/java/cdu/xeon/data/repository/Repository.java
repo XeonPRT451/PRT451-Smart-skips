@@ -135,7 +135,7 @@ public class Repository {
    }
 
 
-   public static Pager<Landfill> getLandfill(Context context){
+   public static List<Landfill> getLandfill(Context context){
        /**String command = "/smartskips/landfill/mobileList";
        String json= WebServiceGet.executeHttpGet(command);
        System.out.println(json);
@@ -143,12 +143,11 @@ public class Repository {
        InputStream input = context.getResources().openRawResource(R.raw.landfill);
        String json=txt2string(input);
 
-       Pager<Landfill> pl=(Pager<Landfill>)JsonUtil.json2obj(json,Pager.class);
-       List<Landfill> ll=pl.getDatas();
-       return pl;
+       List<Landfill> ll=(List<Landfill>)JsonUtil.jsonToBeanList(json,Landfill.class);
+       return ll;
    }
 
-    public static Pager<Operator> getOperator(Context context,int lid){
+    public static List<Operator> getOperator(Context context,int lid){
         /**String command = "/smartskips/operator/mobileList?lid="+lid;
          String json= WebServiceGet.executeHttpGet(command);
          System.out.println(json);
@@ -157,8 +156,8 @@ public class Repository {
             //String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/operator.txt");
             InputStream input = context.getResources().openRawResource(R.raw.operator);
             String json=txt2string(input);
-            Pager<Operator> po = (Pager<Operator>) JsonUtil.json2obj(json, Pager.class);
-            return po;
+            List<Operator> lo=(List<Operator>)JsonUtil.jsonToBeanList(json,Operator.class);
+            return lo;
         }
         return null;
     }
