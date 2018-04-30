@@ -31,7 +31,7 @@ public class UserProfile extends LifecycleLoggingActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userprofile);
         Driver driver = new Driver();
-        driver=(Driver)getIntent().getSerializableExtra("driver");
+        driver=Repository.getDriverDetails(this);
         nameTextView=findViewById(R.id.nameTextView);
         phoneTextView=findViewById(R.id.phoneTextView);
         emailTextView=findViewById(R.id.emailTextView);

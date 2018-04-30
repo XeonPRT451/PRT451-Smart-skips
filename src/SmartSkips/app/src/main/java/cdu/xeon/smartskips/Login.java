@@ -32,9 +32,6 @@ Driver driver= new Driver();
                 if (driver==null){
                     reminder.setText("Login Fail");
                 }else {
-                    Intent intent=new Intent(Login.this,UserProfile.class);
-                    intent.putExtra("driver",driver);
-                    startActivity(intent);
                     startActivity(new Intent(Login.this, UserProfile.class));
                 }
             }
