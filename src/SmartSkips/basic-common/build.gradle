@@ -36,5 +36,10 @@ dependencies {
     implementation files('libs/ormlite-android-4.48.jar')
     implementation files('libs/ormlite-core-4.48.jar')
     implementation'com.google.code.gson:gson:2.6.2'
+    //google play services
+    implementation 'com.google.android.gms:play-services-plus:15.0.0'
+    implementation 'com.google.android.gms:play-services-maps:15.0.0'
+    implementation 'com.google.android.gms:play-services-places:15.0.0'
+    implementation 'com.google.android.gms:play-services-base:15.0.0'
 
 }

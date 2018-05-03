@@ -3,13 +3,15 @@ package cdu.xeon.data.bean;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2/04/2018.
  */
 
 
 @DatabaseTable(tableName = "tb_operator")
-public class Operator {
+public class Operator implements Serializable {
 
     @DatabaseField(generatedId = true)
     private int id;

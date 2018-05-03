@@ -12,8 +12,15 @@ public class SkipDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skip_details);
 
+        findViewById(R.id.userProfileButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SkipDetails.this,UserProfile.class));
+            }
+        });
 
         findViewById(R.id.GoToMap).setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 startActivity(new Intent(SkipDetails.this,MapPageActivity.class));
             }

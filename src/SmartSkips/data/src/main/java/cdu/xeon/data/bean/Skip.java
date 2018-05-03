@@ -3,6 +3,8 @@ package cdu.xeon.data.bean;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2/04/2018.
  */
@@ -10,7 +12,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 
  @DatabaseTable(tableName = "tb_skip")
-public class Skip {
+public class Skip implements Serializable {
       @DatabaseField(generatedId = true)
  private int id;
         @DatabaseField(columnName = "name")
@@ -24,6 +26,9 @@ public class Skip {
      @DatabaseField(columnName = "full")
     private int full;
 
+    @DatabaseField(columnName = "status")
+     private int status;
+
      public static final int GENERAL_WASTE =0;
      public static final int CONSTRUCTION_WASTE =1;
      //  0:general waste 1:construction waste
@@ -36,8 +41,13 @@ public class Skip {
     @DatabaseField(columnName = "current_capacity")
     private double currentCapacity;
 
-     @DatabaseField(canBeNull = true, foreign = true, columnName = "driver_id")
-     private Driver driver;
+    @DatabaseField(columnName = "longitudes")
+    private double longitude;
+
+    @DatabaseField(columnName = "latitude")
+    private double latitude;
+
+
      public Skip()
      {
      }
@@ -64,13 +74,6 @@ public class Skip {
         this.currentCapacity = currentCapacity;
     }
 
-    public Driver getDriver() {
-         return driver;
-     }
-
-     public void setDriver(Driver driver) {
-         this.driver = driver;
-     }
 
      public int getFull() {
          return full;
@@ -120,4 +123,30 @@ public class Skip {
                 this.location = location;
             }
 
-        }
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+
+
+}

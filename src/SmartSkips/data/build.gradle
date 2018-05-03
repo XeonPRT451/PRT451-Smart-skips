@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 
 android {
@@ -7,7 +7,7 @@ android {
 
 
     defaultConfig {
-        applicationId "cdu.xeon.data"
+
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -46,5 +46,11 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.4'
     implementation 'com.squareup.okhttp3:okhttp:3.2.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+
+    //google play services
+    implementation 'com.google.android.gms:play-services-plus:15.0.0'
+    implementation 'com.google.android.gms:play-services-maps:15.0.0'
+    implementation 'com.google.android.gms:play-services-places:15.0.0'
+    implementation 'com.google.android.gms:play-services-base:15.0.0'
 
 }
