@@ -15,14 +15,27 @@ public class SkipDetails extends AppCompatActivity {
         findViewById(R.id.userProfileButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SkipDetails.this,UserProfile.class));
+                Intent intent = new Intent();
+                intent.setClass(SkipDetails.this,UserProfile.class );
+                startActivity(intent);
+                int version = Integer.valueOf(android.os.Build.VERSION.SDK);
+                if(version >= 5) {
+                    overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                }
             }
         });
 
         findViewById(R.id.GoToMap).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SkipDetails.this,MapPageActivity.class));
+                Intent intent = new Intent();
+                intent.setClass(SkipDetails.this,MapPageActivity.class );
+                startActivity(intent);
+                int version = Integer.valueOf(android.os.Build.VERSION.SDK);
+                if(version >= 5) {
+                    overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                }
+               // startActivity(new Intent(SkipDetails.this,MapPageActivity.class));
             }
         });
     }

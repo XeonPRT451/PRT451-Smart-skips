@@ -102,7 +102,14 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         findViewById(R.id.btnStartAnotherAty).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MapPageActivity.this,SkipDetails.class));
+                Intent intent = new Intent();
+                intent.setClass(MapPageActivity.this,SkipDetails.class );
+                startActivity(intent);
+                int version = Integer.valueOf(android.os.Build.VERSION.SDK);
+                if(version >= 5) {
+                    overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                }
+                //startActivity(new Intent(MapPageActivity.this,SkipDetails.class));
             }
         });
     }
