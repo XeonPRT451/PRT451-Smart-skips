@@ -17,6 +17,7 @@ import cdu.xeon.data.bean.Landfill;
 import cdu.xeon.data.bean.Operator;
 import cdu.xeon.data.bean.Pager;
 import cdu.xeon.data.bean.Skip;
+import cdu.xeon.data.bean.SmartskipsException;
 import cdu.xeon.data.db.BaseDao;
 import cdu.xeon.data.db.SSDao;
 import cdu.xeon.data.network.service.WebServiceGet;
@@ -144,6 +145,13 @@ public class Repository {
        String json=txt2string(input);
 
        List<Landfill> ll=(List<Landfill>)JsonUtil.jsonToBeanList(json,Landfill.class);
+       for(Landfill l:ll){
+           try {
+               landfillDao.save(l);
+           } catch (SQLException e) {
+               e.printStackTrace();
+           }
+       }
        return ll;
    }
 
@@ -157,6 +165,13 @@ public class Repository {
             InputStream input = context.getResources().openRawResource(R.raw.operator);
             String json=txt2string(input);
             List<Operator> lo=(List<Operator>)JsonUtil.jsonToBeanList(json,Operator.class);
+            for(Operator o:lo){
+                try {
+                    operatorDao.save(o);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
             return lo;
         }
         return null;
@@ -176,33 +191,101 @@ public class Repository {
 
         List<Skip> ls=(List<Skip>)JsonUtil.jsonToBeanList(json,Skip.class);
 
+        for(Skip s:ls){
+            try {
+                skipDao.save(s);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         return ls;
     }
 
     public static String updateDriver(Driver d){
-        String dj=JsonUtil.obj2json(d);
-        String command="/smartskips/driver/mobileUpdate?driver="+dj;
-      System.out.println(command);
-        String result= WebServiceGet.executeHttpGet(command);
-        result=(String) JsonUtil.json2obj(result, String.class);
-        return  result;
+
+        Driver od= null;
+        try {
+            od = driverDao.queryById(d.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        od.setEmail(d.getEmail());
+        od.setPhone(d.getPhone());
+        od.setNickname(d.getNickname());
+        try {
+            driverDao.update(od);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+          return "success";
+//        String dj=JsonUtil.obj2json(d);
+//        String command="/smartskips/driver/mobileUpdate?driver="+dj;
+//        System.out.println(command);
+//        String result= WebServiceGet.executeHttpGet(command);
+//        result=(String) JsonUtil.json2obj(result, String.class);
+//        return  result;
     }
 
     public static String pickupSkip(int did,int sid){
-        String command="/smartskips/driver/mobilePickupSkip?did="+did+"&sid="+sid;
-        System.out.println(command);
-        String result= WebServiceGet.executeHttpGet(command);
-        result=(String) JsonUtil.json2obj(result, String.class);
-        return  result;
+        try {
+        Driver d = driverDao.queryById(did);
+        if(d.getLoaded()==1) {
+            throw new SmartskipsException("This truck already loaded skip");
+
+        }
+        d.setLoaded(1);
+        Skip s=skipDao.queryById(sid);
+        if(s.getFull()==0) {
+            throw new SmartskipsException("This skip is not full");
+        }
+
+        s.setFull(0);
+        d.setType(s.getType());
+        d.setTrashamount(s.getCapacity()-s.getCurrentCapacity());
+        s.setCurrentCapacity(s.getCapacity());
+        driverDao.update(d);
+
+            skipDao.update(s);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "success";
+//        String command="/smartskips/driver/mobilePickupSkip?did="+did+"&sid="+sid;
+//        System.out.println(command);
+//        String result= WebServiceGet.executeHttpGet(command);
+//        result=(String) JsonUtil.json2obj(result, String.class);
+//        return  result;
     }
 
     public static String emptySkip(int did, int lid){
 
-        String command="/smartskips/driver/mobileEmptySkip?did="+did+"&lid="+lid;
-        System.out.println(command);
-        String result= WebServiceGet.executeHttpGet(command);
-        result=(String) JsonUtil.json2obj(result, String.class);
-        return  result;
+        try {
+        Driver d=driverDao.queryById(did);
+        Landfill l=landfillDao.queryById(lid);
+        if(d.getType()==2 || d.getTrashamount()==0 || d.getLoaded()==0) {
+            throw new SmartskipsException("The truck is empty");
+        }
+        if(d.getType()==1) {
+            l.setCurrentCWCapacity(l.getCurrentCWCapacity()-d.getTrashamount());
+        }
+        if(d.getType()==0) {
+            l.setCurrentGWCapacity(l.getCurrentGWCapacity()-d.getTrashamount());
+        }
+        d.setType(2);
+        d.setTrashamount(0.0);
+        d.setLoaded(0);
+        driverDao.update(d);
+        landfillDao.update(l);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    return "success";
+//        String command="/smartskips/driver/mobileEmptySkip?did="+did+"&lid="+lid;
+//        System.out.println(command);
+//        String result= WebServiceGet.executeHttpGet(command);
+//        result=(String) JsonUtil.json2obj(result, String.class);
+//        return  result;
     }
 
     public static String updatePwd(int did,String oldPwd, String newPwd){
