@@ -2,6 +2,7 @@ package cdu.xeon.smartskips;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.view.View;
@@ -17,6 +18,10 @@ EditText userNameEditText;
 EditText passWordEditText;
 TextView reminder;
 Driver driver= new Driver();
+    private int LOGIN_CHANCES = 3;
+    //还剩几次登录机会的标志，初始值就是LOGIN_CHANCES
+    private int count = LOGIN_CHANCES;
+    private float WAIT_TIME = 30000L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +38,37 @@ Driver driver= new Driver();
 
             public void onClick(View view) {
                 driver = Repository.login(getApplicationContext(),userNameEditText.getText().toString(),passWordEditText.getText().toString());
-                if (driver==null){
-                    Toast toast=Toast.makeText(Login.this, "Username or Password Wrong!!", Toast.LENGTH_SHORT);
-                    toast.show();
+                SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
+
+                //输入错误时的时间,如果为空的话就取0L
+                long errorTime = sp.getLong("errorTime", 0L);
+                //获取当前时间
+                long recentTime = System.currentTimeMillis();
+
+                if(recentTime - errorTime > WAIT_TIME) {
+
+                    if (driver==null){
+                        count--;
+                        Toast.makeText(Login.this, "you have" + count + "chance！", Toast.LENGTH_LONG).show();
                    // reminder.setText("Login Fail");
+                        if (count==0){
+                            Toast.makeText(Login.this, "continue" + LOGIN_CHANCES + "times loginfail，pleas wait" + WAIT_TIME / 1000 +"s！", Toast.LENGTH_LONG).show();
+                            count = LOGIN_CHANCES;
+                            errorTime = System.currentTimeMillis();
+                            SharedPreferences sp1 = getSharedPreferences("data", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sp1.edit();
+                            editor.putLong("errorTime", errorTime);
+                            editor.commit();
+                        }
+
                 }else {
                         Intent intent = new Intent();
-                        intent.setClass(Login.this,UserProfile.class );
+                        intent.setClass(Login.this, UserProfile.class);
                         startActivity(intent);
                         int version = Integer.valueOf(android.os.Build.VERSION.SDK);
-                        if(version >= 5) {
+                        if (version >= 5) {
                             overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                        }
                     }
                 }
             }
