@@ -5,7 +5,8 @@
     android:id="@+id/loginText"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cdu.xeon.smartskips.Login">
+    tools:context="cdu.xeon.smartskips.Login"
+    android:background="#faebd7">
 
     <EditText
         android:id="@+id/nameEditText"
@@ -36,28 +37,32 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textPassword"
         android:hint="Password"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+        app:layout_constraintVertical_bias="0.071" />
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="364dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_width="429dp"
+        android:layout_height="69dp"
         android:layout_marginEnd="12dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="12dp"
         android:layout_marginStart="8dp"
-        android:background="#03C8BB"
+        android:layout_marginTop="260dp"
+        android:background="#4dd2ff"
         android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.447"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+        tools:textSize="24sp" />
 
     <ImageView
         android:id="@+id/loginLogo"

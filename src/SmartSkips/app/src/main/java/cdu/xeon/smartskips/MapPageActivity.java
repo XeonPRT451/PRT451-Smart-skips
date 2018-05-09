@@ -80,7 +80,20 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                 startActivity(new Intent(MapPageActivity.this,SkipDetails.class));
             }
         });
+        findViewById(R.id.userProfileButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(MapPageActivity.this,UserProfile.class );
+                startActivity(intent);
+                int version = Integer.valueOf(android.os.Build.VERSION.SDK);
+                if(version >= 5) {
+                    overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                }
+            }
+        });
     }
+
 
     //preparing the map
     @Override
