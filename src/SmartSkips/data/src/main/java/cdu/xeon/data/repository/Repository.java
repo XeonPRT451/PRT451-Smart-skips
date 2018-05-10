@@ -116,6 +116,7 @@ public class Repository {
    }
 
    public static Driver getDriverDetails(Context context){
+       driverDao=new SSDao<>(context,Driver.class);
        Driver d= null;
        try {
            d = driverDao.queryById(1);
@@ -137,6 +138,7 @@ public class Repository {
 
 
    public static List<Landfill> getLandfill(Context context){
+       landfillDao=new SSDao<>(context,Landfill.class);
        /**String command = "/smartskips/landfill/mobileList";
        String json= WebServiceGet.executeHttpGet(command);
        System.out.println(json);
@@ -156,6 +158,7 @@ public class Repository {
    }
 
     public static List<Operator> getOperator(Context context,int lid){
+        operatorDao=new SSDao<>(context,Operator.class);
         /**String command = "/smartskips/operator/mobileList?lid="+lid;
          String json= WebServiceGet.executeHttpGet(command);
          System.out.println(json);
@@ -178,6 +181,7 @@ public class Repository {
     }
 
     public static List<Skip> getSkip(Context context){
+        skipDao=new SSDao<>(context,Skip.class);
         /**  String command = "/smartskips/skip/mobileList";
          String json= WebServiceGet.executeHttpGet(command);
          System.out.println(json);
@@ -185,12 +189,19 @@ public class Repository {
          **/
 
 
-     // String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/skip.txt");
-       InputStream input = context.getResources().openRawResource(R.raw.skip);
-        String json=txt2string(input);
+     String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/skip.txt");
+       //InputStream input = context.getResources().openRawResource(R.raw.skip);
+        //String json=txt2string(input);
 
         List<Skip> ls=(List<Skip>)JsonUtil.jsonToBeanList(json,Skip.class);
 
+
+//        try {
+//            Skip s=ls.get(1);
+//            skipDao.save(s);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         for(Skip s:ls){
             try {
                 skipDao.save(s);
@@ -202,7 +213,8 @@ public class Repository {
         return ls;
     }
 
-    public static String updateDriver(Driver d){
+    public static String updateDriver(Context context,Driver d){
+        driverDao=new SSDao<>(context,Driver.class);
 
         Driver od= null;
         try {
@@ -227,7 +239,9 @@ public class Repository {
 //        return  result;
     }
 
-    public static String pickupSkip(int did,int sid){
+    public static String pickupSkip(Context context,int did,int sid){
+        driverDao=new SSDao<>(context,Driver.class);
+        skipDao=new SSDao<>(context,Skip.class);
         try {
         Driver d = driverDao.queryById(did);
         if(d.getLoaded()==1) {
@@ -258,8 +272,9 @@ public class Repository {
 //        return  result;
     }
 
-    public static String emptySkip(int did, int lid){
-
+    public static String emptySkip(Context context,int did, int lid){
+        driverDao=new SSDao<>(context,Driver.class);
+        landfillDao=new SSDao<>(context,Landfill.class);
         try {
         Driver d=driverDao.queryById(did);
         Landfill l=landfillDao.queryById(lid);
