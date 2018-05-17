@@ -120,6 +120,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="UserProfile"
+        android:background="#00E885"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintHorizontal_bias="0.307"
@@ -129,7 +130,7 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="413dp"
+        android:layout_width="639dp"
         android:layout_height="69dp"
         android:background="#00E885"
         android:text=""
