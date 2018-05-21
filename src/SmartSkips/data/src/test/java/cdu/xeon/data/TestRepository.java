@@ -7,7 +7,7 @@ import cdu.xeon.data.bean.Driver;
 import cdu.xeon.data.bean.Skip;
 import cdu.xeon.data.repository.Repository;
 
-//public class TestRepository {
+public class TestRepository {
 
 //    @Test
 //    public void testGetDriver(){
@@ -49,4 +49,4 @@ import cdu.xeon.data.repository.Repository;
 //        System.out.println(Repository.updatePwd(2,"123","321"));
 //    }
 //
-//}
+}
