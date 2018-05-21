@@ -189,9 +189,9 @@ public class Repository {
          **/
 
 
-     String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/skip.txt");
-       //InputStream input = context.getResources().openRawResource(R.raw.skip);
-        //String json=txt2string(input);
+         //String json = txt2string("F:/AndroidProjects/PRT451-Smart-skips/src/SmartSkips/json/skip.txt");
+       InputStream input = context.getResources().openRawResource(R.raw.skip);
+        String json=txt2string(input);
 
         List<Skip> ls=(List<Skip>)JsonUtil.jsonToBeanList(json,Skip.class);
 
