@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cdu.xeon.smartskips.SkipDetails"
     android:background="#f7f7fc"
-    >
+    tools:context="cdu.xeon.smartskips.SkipDetails">
 
     <ImageView
         android:id="@+id/imageView"
@@ -135,4 +134,11 @@
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
 </android.support.constraint.ConstraintLayout>
