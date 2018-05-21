@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cdu.xeon.smartskips.SkipDetails"
-    android:background="#ffffe7"
+    android:background="#f7f7fc"
     >
 
     <ImageView
@@ -120,7 +120,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="UserProfile"
-        android:background="#00E885"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintHorizontal_bias="0.307"

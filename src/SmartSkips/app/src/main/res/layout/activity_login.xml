@@ -5,8 +5,8 @@
     android:id="@+id/loginText"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cdu.xeon.smartskips.Login"
-    android:background="#ffffe7">
+    android:background="#f7f7fc"
+    tools:context="cdu.xeon.smartskips.Login">
 
     <EditText
         android:id="@+id/nameEditText"
