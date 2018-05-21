@@ -20,6 +20,7 @@ import cdu.xeon.data.bean.Skip;
 import cdu.xeon.data.bean.SmartskipsException;
 import cdu.xeon.data.db.BaseDao;
 import cdu.xeon.data.db.SSDao;
+import cdu.xeon.data.network.service.HttpURLConnectionPost;
 import cdu.xeon.data.network.service.WebServiceGet;
 import cdu.xeon.data.utils.JsonUtil;
 
@@ -107,6 +108,7 @@ public class Repository {
 
 
 //       String command = "/smartskips/driver/mobileLogin?username="+username+"&password="+password;
+      // String json= HttpURLConnectionPost.PostLogin(username, password);
 //       String json= WebServiceGet.executeHttpGet(command);
 //       System.out.println(json);
 //       Driver d = (Driver) JsonUtil.json2obj(json,Driver.class);
