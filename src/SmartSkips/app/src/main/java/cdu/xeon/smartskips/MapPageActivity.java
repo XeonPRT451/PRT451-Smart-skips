@@ -188,6 +188,7 @@ import java.util.List;
 //                startActivity(new Intent(MapPageActivity.this,SkipDetails.class));
 //            }
 //        });
+
 //        findViewById(R.id.userProfileButton).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -445,11 +446,13 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
 
+    ArrayList<LatLng> listPoints;
 //     on creating the application
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mappage);
+        listPoints = new ArrayList<>();
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -458,7 +461,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
 //            init();
 //        }
         getLocationPermission();
-//        updateLocationUI();
+        updateLocationUI();
 
         mapView=findViewById(R.id.mapView1);
         mapView.setBackgroundColor(0000);
@@ -483,7 +486,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         });
     }
 
-    //preparing the map
+//    preparing the map
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
@@ -501,8 +504,8 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             double lat6 = Repository.getSkip(this).get(5).getLatitude();
             double lng6 = Repository.getSkip(this).get(5).getLongitude();
 
-            lat6 = (-12.366347);
-            lng6 =(130.877126);
+//            lat6 = (-12.366347);
+////          lng6 =(130.877126);
 
             LatLng skip6L = new LatLng(lat6, lng6);
             mMap.addMarker(new MarkerOptions().position(skip6L)
@@ -557,14 +560,43 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                     .title(skip1N));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip1L));
 
-
-
-
 //            LatLng skip2 = new LatLng(-12.366347, 130.877126);
 //            mMap.addMarker(new MarkerOptions().position(skip2)
 //                    .title("Skip 2"));
 //            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip2));
 
+
+            mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                @Override
+                public void onMapLongClick(LatLng latLng) {
+                    //Reset marker when already 2
+                    if (listPoints.size() == 2) {
+                        listPoints.clear();
+//                        mMap.clear();
+                    }
+                    //Save first point select
+                    listPoints.add(latLng);
+                    //Create marker
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(latLng);
+
+                    if (listPoints.size() == 1) {
+                        //Add first marker to the map
+                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    } else {
+                        //Add second marker to the map
+                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    }
+                    mMap.addMarker(markerOptions);
+
+                    if (listPoints.size() == 2) {
+                        //Create the URL to get request from first marker to second marker
+                        String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
+                        cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections taskRequestDirections = new cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections();
+                        taskRequestDirections.execute(url);
+                    }
+                }
+            });
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
@@ -607,13 +639,20 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         try{
             if(mLocationPermissionsGranted){
 
-                final Task location = mFusedLocationProviderClient.getLastLocation();
+                 Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if(task.isSuccessful()){
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
+
+                            MarkerOptions marker = new MarkerOptions().position(new LatLng(currentLocation.getLatitude(),
+                                    currentLocation.getLongitude())).title("Driver Location");
+//                            marker.getIcon().
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.plowtruck));
+                            mMap.addMarker(marker);
+
 
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM,
@@ -632,7 +671,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
 //    //camera movement
-    private void moveCamera(LatLng latLng, float zoom, String title){
+    private void moveCamera(LatLng latLng, float zoom, String title ){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
@@ -655,9 +694,9 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             } else {
                 mMap.setMyLocationEnabled(false);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
-//
-                Task mLastKnownLocation = mFusedLocationProviderClient.getLastLocation();
-                mLastKnownLocation = null;
+                Task location = mFusedLocationProviderClient.getLastLocation();
+                location = null;
+
                 getLocationPermission();
             }
         } catch (SecurityException e)  {
@@ -755,7 +794,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
                             return;
                         }
-                       break;
+                        break;
                     }
                     Log.d(TAG, "onRequestPermissionsResult: permission granted");
                     mLocationPermissionsGranted = true;
@@ -764,7 +803,148 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                 }
             }
         }
+
+
+
+        findViewById(R.id.userProfileButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(MapPageActivity.this,UserProfile.class );
+                startActivity(intent);
+                int version = Integer.valueOf(android.os.Build.VERSION.SDK);
+                if(version >= 5) {
+                    overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                }
+            }
+        });
+
     }
+
+        private String getRequestUrl(LatLng origin, LatLng dest) {
+            //Value of origin
+            String str_org = "origin=" + origin.latitude +","+origin.longitude;
+            //Value of destination
+            String str_dest = "destination=" + dest.latitude+","+dest.longitude;
+            //Set value enable the sensor
+            String sensor = "sensor=false";
+            //Mode for find direction
+            String mode = "mode=driving";
+            //Build the full param
+            String param = str_org +"&" + str_dest + "&" +sensor+"&" +mode;
+            //Output format
+            String output = "json";
+            //Create url to request
+            String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + param;
+            return url;
+        }
+
+        private String requestDirection(String reqUrl) throws IOException {
+            String responseString = "";
+            InputStream inputStream = null;
+            HttpURLConnection httpURLConnection = null;
+            try{
+                URL url = new URL(reqUrl);
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.connect();
+
+                //Get the response result
+                inputStream = httpURLConnection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuffer stringBuffer = new StringBuffer();
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuffer.append(line);
+                }
+
+                responseString = stringBuffer.toString();
+                bufferedReader.close();
+                inputStreamReader.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                httpURLConnection.disconnect();
+            }
+            return responseString;
+        }
+
+        public class TaskRequestDirections extends AsyncTask<String, Void, String> {
+
+            @Override
+            protected String doInBackground(String... strings) {
+                String responseString = "";
+                try {
+                    responseString = requestDirection(strings[0]);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return  responseString;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                //Parse json here
+                cdu.xeon.smartskips.MapPageActivity.TaskParser taskParser = new cdu.xeon.smartskips.MapPageActivity.TaskParser();
+                taskParser.execute(s);
+            }
+        }
+
+        public class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>> > {
+
+            @Override
+            protected List<List<HashMap<String, String>>> doInBackground(String... strings) {
+                JSONObject jsonObject = null;
+                List<List<HashMap<String, String>>> routes = null;
+                try {
+                    jsonObject = new JSONObject(strings[0]);
+                    DirectionParser directionsParser = new DirectionParser();
+                    routes = directionsParser.parse(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return routes;
+            }
+
+            @Override
+            protected void onPostExecute(List<List<HashMap<String, String>>> lists) {
+                //Get list route and display it into the map
+
+                ArrayList points = null;
+
+                PolylineOptions polylineOptions = null;
+
+                for (List<HashMap<String, String>> path : lists) {
+                    points = new ArrayList();
+                    polylineOptions = new PolylineOptions();
+
+                    for (HashMap<String, String> point : path) {
+                        double lat = Double.parseDouble(point.get("lat"));
+                        double lon = Double.parseDouble(point.get("lon"));
+
+                        points.add(new LatLng(lat,lon));
+                    }
+
+                    polylineOptions.addAll(points);
+                    polylineOptions.width(15);
+                    polylineOptions.color(Color.BLUE);
+                    polylineOptions.geodesic(true);
+                }
+
+                if (polylineOptions!=null) {
+                    mMap.addPolyline(polylineOptions);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Direction not found!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }
 }
 
 

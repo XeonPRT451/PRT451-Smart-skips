@@ -34,6 +34,367 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+
+//public class MapPageActivity extends AppCompatActivity implements OnMapReadyCallback{
+//
+//    // initialisation of the variables
+//    private MapView mapView;
+//    private static final String TAG = "MapActivity";
+//    private static final int ERROR_DIALOG_REQUEST = 9001;
+//    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+//    private static final float DEFAULT_ZOOM = 15f;
+//    private static final int LOCATION_REQUEST = 500;
+//    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+//    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+//    private FusedLocationProviderClient mFusedLocationProviderClient;
+//
+//    //variables for checking for permission
+//    private Boolean mLocationPermissionsGranted = false;
+//    private GoogleMap mMap;
+//
+////     on creating the application
+//    @Override
+//    protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_mappage);
+//
+//        // Construct a FusedLocationProviderClient.
+//        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+//
+////        if(isServiceOK()){
+////            init();
+////        }
+//        getLocationPermission();
+////        updateLocationUI();
+//
+//        mapView=findViewById(R.id.mapView1);
+//        mapView.setBackgroundColor(0000);
+//
+//        findViewById(R.id.btnStartAnotherAty).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MapPageActivity.this,SkipDetails.class));
+//            }
+//        });
+//        findViewById(R.id.userProfileButton).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent();
+//                intent.setClass(MapPageActivity.this,UserProfile.class );
+//                startActivity(intent);
+//                int version = Integer.valueOf(android.os.Build.VERSION.SDK);
+//                if(version >= 5) {
+//                    overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+//                }
+//            }
+//        });
+//    }
+
+//preparing the map
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
+//        Log.d(TAG, "onMapReady: map is ready");
+//        mMap = googleMap;
+//
+////        List<Skip> ss=Repository.getSkip(getApplicationContext());
+////          String first = ss.get(1).getName();
+//
+//        if (mLocationPermissionsGranted) {
+//            getDeviceLocation();
+////            getGeolocation();
+//
+//            String skip6N = Repository.getSkip(this).get(5).getName();
+//            double lat6 = Repository.getSkip(this).get(5).getLatitude();
+//            double lng6 = Repository.getSkip(this).get(5).getLongitude();
+//
+////            lat6 = (-12.366347);
+//////            lng6 =(130.877126);
+//
+//            LatLng skip6L = new LatLng(lat6, lng6);
+//            mMap.addMarker(new MarkerOptions().position(skip6L)
+//                    .title(skip6N));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip6L));
+//
+//
+//
+//            String skip5N = Repository.getSkip(this).get(4).getName();
+//            double lat5 = Repository.getSkip(this).get(4).getLatitude();
+//            double lng5 = Repository.getSkip(this).get(4).getLongitude();
+//            LatLng skip5L = new LatLng(lat5, lng5);
+//            mMap.addMarker(new MarkerOptions().position(skip5L)
+//                    .title(skip5N));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip5L));
+//
+//
+//            String skip4N = Repository.getSkip(this).get(3).getName();
+//            double lat4 = Repository.getSkip(this).get(3).getLatitude();
+//            double lng4 = Repository.getSkip(this).get(3).getLongitude();
+//            LatLng skip4L = new LatLng(lat4, lng4);
+//            mMap.addMarker(new MarkerOptions().position(skip4L)
+//                    .title(skip4N));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip4L));
+//
+//
+//
+//            String skip3N = Repository.getSkip(this).get(2).getName();
+//            double lat3 = Repository.getSkip(this).get(2).getLatitude();
+//            double lng3 = Repository.getSkip(this).get(2).getLongitude();
+//            LatLng skip3L = new LatLng(lat3, lng3);
+//            mMap.addMarker(new MarkerOptions().position(skip3L)
+//                    .title(skip3N));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip3L));
+//
+//
+//
+//            String skip2N = Repository.getSkip(this).get(1).getName();
+//            double lat2 = Repository.getSkip(this).get(1).getLatitude();
+//            double lng2 = Repository.getSkip(this).get(1).getLongitude();
+//            LatLng skip2L = new LatLng(lat2, lng2);
+//            mMap.addMarker(new MarkerOptions().position(skip2L)
+//                    .title(skip2N));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip2L));
+//
+//
+//            String skip1N = Repository.getSkip(this).get(0).getName();
+//            double lat1 = Repository.getSkip(this).get(0).getLatitude();
+//            double lng1 = Repository.getSkip(this).get(0).getLongitude();
+//            LatLng skip1L = new LatLng(lat1, lng1);
+//            mMap.addMarker(new MarkerOptions().position(skip1L)
+//                    .title(skip1N));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip1L));
+//
+//
+//
+//
+////            LatLng skip2 = new LatLng(-12.366347, 130.877126);
+////            mMap.addMarker(new MarkerOptions().position(skip2)
+////                    .title("Skip 2"));
+////            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip2));
+//
+//
+//            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+//                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+//                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                return;
+//            }
+//            mMap.setMyLocationEnabled(true);
+//            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+//            mMap.getUiSettings().isMapToolbarEnabled();
+//            mMap.getUiSettings().setScrollGesturesEnabled(true);
+//            mMap.getUiSettings().isRotateGesturesEnabled();
+//            mMap.getUiSettings().setZoomControlsEnabled(true);
+//            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+//            updateLocationUI();
+//
+//        }
+//    }
+//
+//        public void getGeolocation() {
+//
+////            // initialize and set skip location
+//            String skip6N = Repository.getSkip(this).get(5).getName();
+//            double lat = Repository.getSkip(this).get(5).getLatitude();
+//            double lng = Repository.getSkip(this).get(5).getLongitude();
+//
+//            LatLng skip6L = new LatLng(lat, lng);
+//            mMap.addMarker(new MarkerOptions().position(skip6L)
+//                    .title(skip6N));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip6L));
+//
+//
+//        }
+////
+//    // getting device's location
+//    private void getDeviceLocation(){
+//        Log.d(TAG, "getDeviceLocation: getting the devices current location");
+//
+//        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+//
+//        try{
+//            if(mLocationPermissionsGranted){
+//
+//                final Task location = mFusedLocationProviderClient.getLastLocation();
+//                location.addOnCompleteListener(new OnCompleteListener() {
+//                    @Override
+//                    public void onComplete(@NonNull Task task) {
+//                        if(task.isSuccessful()){
+//                            Log.d(TAG, "onComplete: found location!");
+//                            Location currentLocation = (Location) task.getResult();
+//
+//                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
+//                                    DEFAULT_ZOOM,
+//                                    "Driver Location");
+//
+//                        }else{
+//                            Log.d(TAG, "onComplete: current location is null");
+//                            Toast.makeText(MapPageActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//            }
+//        }catch (SecurityException e){
+//            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
+//        }
+//    }
+//
+////    //camera movement
+//    private void moveCamera(LatLng latLng, float zoom, String title){
+//        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+//
+//        if(!title.equals("My Location")){
+//            MarkerOptions options = new MarkerOptions()
+//                    .position(latLng)
+//                    .title(title);
+//            mMap.addMarker(options);
+//        }
+//    }
+////updating location
+//    private void updateLocationUI() {
+//        if (mMap == null) {
+//            return;
+//        }
+//        try {
+//            if (mLocationPermissionsGranted) {
+//                mMap.setMyLocationEnabled(true);
+//                mMap.getUiSettings().setMyLocationButtonEnabled(true);
+//            } else {
+//                mMap.setMyLocationEnabled(false);
+//                mMap.getUiSettings().setMyLocationButtonEnabled(false);
+////
+//                Task mLastKnownLocation = mFusedLocationProviderClient.getLastLocation();
+//                mLastKnownLocation = null;
+//                getLocationPermission();
+//            }
+//        } catch (SecurityException e)  {
+//            Log.e("Exception: %s", e.getMessage());
+//        }
+//    }
+//
+////    //initialisation process
+////    private void init(){
+////        Button btnMap = (Button) findViewById(R.id.btnMap);
+////        btnMap.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+////                Intent intent = new Intent(MapPageActivity.this, MapPageActivity.class);
+////                startActivity(intent);
+////            }
+////        });
+////    }
+//
+//    private void initMap(){
+//        Log.d(TAG, "initMap: initializing map");
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(MapPageActivity.this);
+//    }
+//
+////     enabling all services and requesting permission
+////     checking if the services are enabled
+//    public boolean isServiceOK(){
+//        Log.d(TAG,"isServicesOK: checking google services version");
+//        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MapPageActivity.this);
+//
+//        if(available == ConnectionResult.SUCCESS) {
+//            //user can make request
+//            Log.d(TAG, "isServicesOK: Google Play Services is working");
+//            return true;
+//        }
+//        else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+//            //occured errors can be resolved
+//            Log.d(TAG, "isServicesOK: an error occured but we can fix this");
+//            Dialog dialog= GoogleApiAvailability.getInstance().getErrorDialog(MapPageActivity.this, available, ERROR_DIALOG_REQUEST);
+//            dialog.show();
+//        }else{
+//            Toast.makeText(this, " map request cannot be made",Toast.LENGTH_SHORT).show();
+//        }
+//        return false;
+//    }
+//    // checking the location permission
+//    private void getLocationPermission(){
+//        Log.d(TAG, "getLocationPermission: getting location permissions");
+//        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
+//                Manifest.permission.ACCESS_COARSE_LOCATION};
+//
+//        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
+//                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+//            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
+//                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+//                mLocationPermissionsGranted = true;
+//                initMap();
+//            }else{
+//                ActivityCompat.requestPermissions(this,
+//                        permissions,
+//                        LOCATION_PERMISSION_REQUEST_CODE);
+//            }
+//        }else{
+//            ActivityCompat.requestPermissions(this,
+//                    permissions,
+//                    LOCATION_PERMISSION_REQUEST_CODE);
+//        }
+//    }
+//
+//    @SuppressLint("MissingPermission")
+//    public void onRequestPermissionsResults(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        switch (requestCode){
+//            case LOCATION_REQUEST:
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    mMap.setMyLocationEnabled(true);
+//                }
+//                break;
+//        }
+//        initMap();
+//    }
+//
+//    //requesting permission on result
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        Log.d(TAG, "onRequestPermissionsResult: called.");
+//        mLocationPermissionsGranted = false;
+//
+//        switch(requestCode){
+//            case LOCATION_PERMISSION_REQUEST_CODE:{
+//                if(grantResults.length > 0){
+//                    for(int i = 0; i < grantResults.length; i++){
+//                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+//                            mLocationPermissionsGranted = false;
+//                            Log.d(TAG, "onRequestPermissionsResult: permission failed");
+//                            return;
+//                        }
+//                       break;
+//                    }
+//                    Log.d(TAG, "onRequestPermissionsResult: permission granted");
+//                    mLocationPermissionsGranted = true;
+//                    //initialize our map
+//                    initMap();
+//                }
+//            }
+//        }
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -257,4 +618,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 }
+
+
+
+
+
+
 
