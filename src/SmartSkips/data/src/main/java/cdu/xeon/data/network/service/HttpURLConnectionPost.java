@@ -80,7 +80,7 @@ public class HttpURLConnectionPost {
         String result = "";
         BufferedReader reader = null;
         try {
-            URL url=new URL("http://127.0.0.1:8888/smartskips/driver/mobileLogin");
+            URL url=new URL("http://192.168.253.1:8888/smartskips/driver/mobileLogin");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
