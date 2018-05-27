@@ -143,6 +143,11 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     private Marker mMarker;
 
     ArrayList<LatLng> listPoints;
+    private  double lat = 0.0;
+    private double lng = 0.0;
+
+    private LatLng landfillpos1;
+
 //     on creating the application
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -152,6 +157,23 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+        Bundle bundle = getIntent().getBundleExtra("location");
+        if(bundle == null){
+
+           lat = Repository.getLandfill(this).get(0).getLatitude();
+           lng = Repository.getLandfill(this).get(0).getLongitude();
+        }else{
+            lat = bundle.getDouble("lan");
+            lng = bundle.getDouble("lon");
+        }
+
+
+
+
+
+
+
         listPoints = new ArrayList<>();
 
         // Construct a FusedLocationProviderClient.
@@ -162,8 +184,6 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
 
         mapView=findViewById(R.id.mapView1);
         mapView.setBackgroundColor(0000);
-
-
     }
 
 //    preparing the map
@@ -232,7 +252,6 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             double lat2 = Repository.getSkip(this).get(1).getLatitude();
             double lng2 = Repository.getSkip(this).get(1).getLongitude();
             LatLng skip2L = new LatLng(lat2, lng2);
-
             mMap.addMarker(new MarkerOptions().position(skip2L)
                     .title(skip2N)
                     .snippet("click for more details"));
@@ -278,17 +297,21 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             mMap.addMarker(markerOpt).showInfoWindow();
 
 
-
-
             //landfill
             String landfill  = Repository.getLandfill(this).get(0).getName();
             double latland = Repository.getLandfill(this).get(0).getLatitude();
             double lngland = Repository.getLandfill(this).get(0).getLongitude();
             LatLng lndfillpos = new LatLng(latland, lngland);
+            landfillpos1=lndfillpos;
             mMap.addMarker(new MarkerOptions().position(lndfillpos)
                     .title(landfill)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.plowtruck)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.bin)));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(lndfillpos));
+
+
+
+
+
 
 
 
@@ -308,9 +331,6 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             });
 
 
-
-
-
             mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
                 @Override
                 public void onMapLongClick(LatLng latLng) {
@@ -319,24 +339,27 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                         listPoints.clear();
                         mMap.clear();
                     }
-                    //Save first point select
-                    listPoints.add(latLng);
-                    //Create marker
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(latLng);
 
-                    if (listPoints.size() == 1) {
-                        //Add first marker to the map
-                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                    } else {
-                        //Add second marker to the map
-                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                    }
-                    mMap.addMarker(markerOptions);
+                    LatLng skipRoute = new LatLng(lat, lng);
+
+                    //Save first point select
+                    listPoints.add(skipRoute);
+//                    //Create marker
+//                    MarkerOptions markerOptions = new MarkerOptions();
+//                    markerOptions.position(latLng);
+//
+//                    if (listPoints.size() == 1) {
+//                        //Add first marker to the map
+//                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//                    } else {
+//                        //Add second marker to the map
+//                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+//                    }
+//                    mMap.addMarker(markerOptions);
 
                     if (listPoints.size() == 2) {
                         //Create the URL to get request from first marker to second marker
-                        String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
+                        String url = getRequestUrl(landfillpos1, skipRoute);
                         cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections taskRequestDirections = new cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections();
                         taskRequestDirections.execute(url);
                     }
@@ -399,11 +422,11 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
 
-//                            MarkerOptions marker = new MarkerOptions().position(new LatLng(currentLocation.getLatitude(),
-//                                    currentLocation.getLongitude())).title("Driver Location");
-////                            marker.getIcon().
-//                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.plowtruck));
-//                            mMap.addMarker(marker);
+                            MarkerOptions marker = new MarkerOptions().position(new LatLng(currentLocation.getLatitude(),
+                                    currentLocation.getLongitude())).title("Driver Location");
+//                            marker.getIcon().
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.plowtruck));
+                            mMap.addMarker(marker);
 
 
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
