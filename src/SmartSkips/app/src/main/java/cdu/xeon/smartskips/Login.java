@@ -55,9 +55,9 @@ Driver driver= new Driver();
                 if(recentTime - errorTime > WAIT_TIME) {
 
                     if (userNameEditText.getText().toString().trim().equals("") ||passWordEditText.getText().toString().trim().equals("") ){
-                        Toast.makeText(Login.this, "Please Input Username or Password！", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Please Input Username or Password！", Toast.LENGTH_LONG).show();
                     }else {
-                        driver = Repository.login(userNameEditText.getText().toString(),passWordEditText.getText().toString());
+                        driver = Repository.login(Login.this,userNameEditText.getText().toString(),passWordEditText.getText().toString());
 
                         if (driver == null) {
                             count--;
@@ -75,6 +75,12 @@ Driver driver= new Driver();
 
                         } else {
                             Intent intent = new Intent();
+                            Bundle bundle= new Bundle();
+                            bundle.putString("name",driver.getUsername());
+                            bundle.putString("phone",driver.getPhone());
+                            bundle.putString("email",driver.getEmail());
+                            bundle.putInt("status",driver.getStatus());
+                            intent.putExtra("bundle",bundle);
                             intent.setClass(Login.this, UserProfile.class);
                             startActivity(intent);
                             int version = Integer.valueOf(android.os.Build.VERSION.SDK);

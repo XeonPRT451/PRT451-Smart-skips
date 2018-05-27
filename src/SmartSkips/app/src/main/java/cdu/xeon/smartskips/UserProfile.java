@@ -43,12 +43,15 @@ public class UserProfile extends LifecycleLoggingActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        Driver driver = new Driver();
-        driver = Repository.getDriverDetails(this,1);
-        mListStr[0]=driver.getUsername();
-        mListStr[1]=driver.getPhone();
-        mListStr[2]=driver.getEmail();
-        if (driver.getStatus()==1){
+        Bundle bundle=getIntent().getBundleExtra("bundle");
+        String username=bundle.getString("name");
+        String phone=bundle.getString("phone");
+        String email=bundle.getString("email");
+        int sta=bundle.getInt("status");
+        mListStr[0]=username;
+        mListStr[1]=phone;
+        mListStr[2]=email;
+        if (sta==1){
             mListStr[3]="online";
         }else {
             mListStr[3]="offline";
