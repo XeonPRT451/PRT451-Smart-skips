@@ -30,7 +30,7 @@ public class SkipDetails extends LifecycleLoggingActivity {
     ArrayList<Map<String,Object>> mData= new ArrayList<Map<String,Object>>();;
     ListView listView;
     int id=1;
-
+   Skip aSkip=new Skip();
 
 
     @Override
@@ -46,11 +46,14 @@ public class SkipDetails extends LifecycleLoggingActivity {
         listView=findViewById(R.id.skipList);
       Bundle bundle=getIntent().getBundleExtra("bundle");
       String ID=bundle.getString("ID");
-      System.out.println(ID);
-      id= Integer.parseInt(ID.substring(5));
-System.out.println(id);
-        final Skip skip=Repository.getSkip(getApplicationContext()).get(id);
-        mListStr[0]=Integer.toString(id);
+      ;ID=ID.substring(4);
+     id=Integer.parseInt(ID)-1;
+      //System.out.println(ID.substring(4));
+
+         Skip skip=Repository.getSkip(SkipDetails.this).get(id);
+         aSkip=skip;
+               // System.out.println(id););
+        mListStr[0]=ID;
        if(skip.getStatus()==1){
            mListStr[1]="Full";
        }else {
@@ -101,9 +104,10 @@ System.out.println(id);
                 Repository.pickupSkip(SkipDetails.this,driver.getId(),id);
 
                 Intent intent=new Intent(SkipDetails.this, MapPageActivity.class);
+                Skip skip2=aSkip;
                 Bundle bundle=new Bundle();
-                bundle.putDouble("lan",skip.getLatitude());
-                bundle.putDouble("lon",skip.getLongitude());
+                bundle.putDouble("lan",skip2.getLatitude());
+                bundle.putDouble("lon",skip2.getLongitude());
                 intent.putExtra("location",bundle);
                 startActivity(intent);
 

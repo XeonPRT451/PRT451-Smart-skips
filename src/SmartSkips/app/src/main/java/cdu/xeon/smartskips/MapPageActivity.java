@@ -121,6 +121,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class MapPageActivity extends AppCompatActivity implements OnMapReadyCallback{
@@ -302,6 +303,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                         bundle.putString("ID",marker.getTitle());
                         intent1.putExtra("bundle",bundle);
                         startActivity(intent1);
+                    mMap.clear();
                 }
             });
 
