@@ -29,7 +29,7 @@ public class SkipDetails extends LifecycleLoggingActivity {
     private String[] mListStr = new  String[3];
     ArrayList<Map<String,Object>> mData= new ArrayList<Map<String,Object>>();;
     ListView listView;
-    int id=0;
+    int id=1;
 
 
 
@@ -44,9 +44,11 @@ public class SkipDetails extends LifecycleLoggingActivity {
 
         instance=this;
         listView=findViewById(R.id.skipList);
-        Bundle bundle=getIntent().getBundleExtra("bundle");
-        String ID=bundle.getString("ID");
-        id= Integer.parseInt(ID.substring(0));
+      Bundle bundle=getIntent().getBundleExtra("bundle");
+      String ID=bundle.getString("ID");
+      System.out.println(ID);
+      id= Integer.parseInt(ID.substring(1));
+System.out.println(id);
         Skip skip=Repository.getSkip(getApplicationContext()).get(id);
         mListStr[0]=Integer.toString(id);
        if(skip.getStatus()==1){
