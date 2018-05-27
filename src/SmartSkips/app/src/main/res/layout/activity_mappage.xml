@@ -11,7 +11,7 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView1"
         android:layout_width="153dp"
-        android:layout_height="506dp"
+        android:layout_height="472dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -21,7 +21,7 @@
         app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.227" />
 
     <!--<Button-->
         <!--android:id="@+id/btnStartAnotherAty"-->
@@ -44,7 +44,7 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="412dp"
-        android:layout_height="552dp"
+        android:layout_height="556dp"
         android:layout_marginBottom="70dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="8dp"
@@ -186,12 +186,13 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         android:text="Please select a Skip to start"
         android:textSize="25dp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
