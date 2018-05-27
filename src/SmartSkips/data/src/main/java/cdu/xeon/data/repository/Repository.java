@@ -105,8 +105,8 @@ public class Repository {
 //       String json=txt2string(input);
             Driver dn = (Driver) JsonUtil.json2obj(json, Driver.class);
             try {
-                driverDao.deleteById(1);
-                driverDao.save(dn);
+
+                driverDao.update(dn);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
