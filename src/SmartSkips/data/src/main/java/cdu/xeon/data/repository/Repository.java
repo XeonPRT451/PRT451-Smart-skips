@@ -105,8 +105,9 @@ public class Repository {
 //       String json=txt2string(input);
             Driver dn = (Driver) JsonUtil.json2obj(json, Driver.class);
             try {
-
+                dn.setId(1);
                 driverDao.saveOrUpdate(dn);
+                System.out.println(driverDao.queryAll());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -166,12 +167,14 @@ public class Repository {
            List<Landfill> ll = (List<Landfill>) JsonUtil.jsonToBeanList(json, Landfill.class);
            for (Landfill l : ll) {
                try {
-                   landfillDao.save(l);
+                   landfillDao.saveOrUpdate(l);
+
+                   System.out.println(landfillDao.queryAll());
                } catch (SQLException e) {
                    e.printStackTrace();
                }
+               return ll;
            }
-           return ll;
        }
        else{
            try {
@@ -200,11 +203,13 @@ public class Repository {
             List<Operator> lo=(List<Operator>)JsonUtil.jsonToBeanList(json,Operator.class);
             for(Operator o:lo){
                 try {
-                    operatorDao.save(o);
+                    operatorDao.saveOrUpdate(o);
+                    System.out.println(operatorDao.queryAll());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
+
             return lo;
         }
         else{
@@ -232,10 +237,11 @@ public class Repository {
 
             List<Skip> ls = (List<Skip>) JsonUtil.jsonToBeanList(json, Skip.class);
 
-
         try {
-            Skip s=ls.get(1);
-            skipDao.save(s);
+            for(Skip s:ls) {
+                skipDao.saveOrUpdate(s);
+                System.out.println(skipDao.queryAll());
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -155,4 +155,21 @@ public class Skip implements Serializable {
     public void setCount(int count) {
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return "Skip{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", full=" + full +
+                ", status=" + status +
+                ", type=" + type +
+                ", capacity=" + capacity +
+                ", currentCapacity=" + currentCapacity +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", count=" + count +
+                '}';
+    }
 }
