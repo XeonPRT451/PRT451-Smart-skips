@@ -13,7 +13,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="88dp"
         android:gravity="center_vertical|center_horizontal|center"
-        android:textSize="20dip" />
+        android:text="mnxni"
+        android:textSize="20dip"
+        android:textStyle="bold"
+        android:typeface="monospace"/>
 
     <TextView
         android:id="@+id/title"
@@ -23,5 +26,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
         android:gravity="center_vertical|center_horizontal"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="20dip"
+        android:textStyle="bold"
+        android:typeface="serif"/>
 </RelativeLayout>
