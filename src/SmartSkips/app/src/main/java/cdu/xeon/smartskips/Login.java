@@ -18,6 +18,8 @@ EditText userNameEditText;
 EditText passWordEditText;
 TextView reminder;
 Driver driver= new Driver();
+
+
     private int LOGIN_CHANCES = 3;
     //还剩几次登录机会的标志，初始值就是LOGIN_CHANCES
     private int count = LOGIN_CHANCES;
@@ -47,27 +49,32 @@ Driver driver= new Driver();
 
                 if(recentTime - errorTime > WAIT_TIME) {
 
-                    if (driver==null){
-                        count--;
-                        Toast.makeText(Login.this, "you have" + count + "chance！", Toast.LENGTH_LONG).show();
-                   // reminder.setText("Login Fail");
-                        if (count==0){
-                            Toast.makeText(Login.this, "continue" + LOGIN_CHANCES + "times loginfail，pleas wait" + WAIT_TIME / 1000 +"s！", Toast.LENGTH_LONG).show();
-                            count = LOGIN_CHANCES;
-                            errorTime = System.currentTimeMillis();
-                            SharedPreferences sp1 = getSharedPreferences("data", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp1.edit();
-                            editor.putLong("errorTime", errorTime);
-                            editor.commit();
-                        }
+                    if (userNameEditText.getText().toString().trim().equals("") ||passWordEditText.getText().toString().trim().equals("") ){
+                        Toast.makeText(Login.this, "Please Input Username or Password！", Toast.LENGTH_LONG).show();
+                    }else {
 
-                }else {
-                        Intent intent = new Intent();
-                        intent.setClass(Login.this, UserProfile.class);
-                        startActivity(intent);
-                        int version = Integer.valueOf(android.os.Build.VERSION.SDK);
-                        if (version >= 5) {
-                            overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                        if (driver == null) {
+                            count--;
+                            Toast.makeText(Login.this, "you have" + " " + count + " " + "chance left！", Toast.LENGTH_LONG).show();
+                            // reminder.setText("Login Fail");
+                            if (count == 0) {
+                                Toast.makeText(Login.this, "continue" + LOGIN_CHANCES + "times loginfail，pleas wait" + WAIT_TIME / 1000 + "s！", Toast.LENGTH_LONG).show();
+                                count = LOGIN_CHANCES;
+                                errorTime = System.currentTimeMillis();
+                                SharedPreferences sp1 = getSharedPreferences("data", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sp1.edit();
+                                editor.putLong("errorTime", errorTime);
+                                editor.commit();
+                            }
+
+                        } else {
+                            Intent intent = new Intent();
+                            intent.setClass(Login.this, UserProfile.class);
+                            startActivity(intent);
+                            int version = Integer.valueOf(android.os.Build.VERSION.SDK);
+                            if (version >= 5) {
+                                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                            }
                         }
                     }
                 }
