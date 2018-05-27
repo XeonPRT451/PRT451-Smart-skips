@@ -47,9 +47,9 @@ public class SkipDetails extends LifecycleLoggingActivity {
       Bundle bundle=getIntent().getBundleExtra("bundle");
       String ID=bundle.getString("ID");
       System.out.println(ID);
-      id= Integer.parseInt(ID.substring(3));
+      id= Integer.parseInt(ID.substring(5));
 System.out.println(id);
-        Skip skip=Repository.getSkip(getApplicationContext()).get(id);
+        final Skip skip=Repository.getSkip(getApplicationContext()).get(id);
         mListStr[0]=Integer.toString(id);
        if(skip.getStatus()==1){
            mListStr[1]="Full";
@@ -100,8 +100,12 @@ System.out.println(id);
    driver=Repository.getDriverDetails(SkipDetails.this,1);
                 Repository.pickupSkip(SkipDetails.this,driver.getId(),id);
 
-
-                SkipDetails.instance.finish();
+                Intent intent=new Intent(SkipDetails.this, MapPageActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putDouble("lan",skip.getLatitude());
+                bundle.putDouble("lon",skip.getLongitude());
+                intent.putExtra("location",bundle);
+                startActivity(intent);
 
                 int version = Integer.valueOf(android.os.Build.VERSION.SDK);
                 if(version >= 5) {

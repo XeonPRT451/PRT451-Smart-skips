@@ -298,10 +298,10 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                     Intent intent1 = new Intent(MapPageActivity.this, SkipDetails.class);
                     String title = marker.getTitle();
                     intent1.putExtra("markertitle", title);
-                    Bundle bundle=new Bundle();
-                    bundle.putString("ID",marker.getTitle());
-                    intent1.putExtra("bundle",bundle);
-                    startActivity(intent1);
+                        Bundle bundle=new Bundle();
+                        bundle.putString("ID",marker.getTitle());
+                        intent1.putExtra("bundle",bundle);
+                        startActivity(intent1);
                 }
             });
 
@@ -371,7 +371,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
 //        }
 //
 
-//    public void getinfowindow(){
+//    public void getinfowindow(){mi'd
 ////
 ////        Marker melbourne = mMap.addMarker(new MarkerOptions()
 ////                .position()
