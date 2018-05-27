@@ -41,7 +41,6 @@ public class SkipDetails extends LifecycleLoggingActivity {
         instance=this;
         listView=findViewById(R.id.skipList);
         Bundle bundle=getIntent().getBundleExtra("bundle");
-        String uname=bundle.getString("title");
         String ID=bundle.getString("ID");
         final int id= Integer.parseInt(ID.substring(0));
 
