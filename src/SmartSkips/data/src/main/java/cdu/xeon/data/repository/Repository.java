@@ -93,7 +93,7 @@ public class Repository {
        }
 
 
-   public static Driver login( Context context,String username, String password, int id) {
+   public static Driver login( Context context,String username, String password) {
        driverDao=new SSDao<>(context,Driver.class);
        if(NetUtil.isNetworkAvailable(context)==TRUE){
        //String command = "/smartskips/driver/mobileLogin?username="+username+"&password="+password;
@@ -110,15 +110,15 @@ public class Repository {
            }
            return dn;
        }
-        else {
-           try {
-
-               Driver dn = driverDao.queryById(id);
-               return dn;
-           } catch (SQLException e) {
-               e.printStackTrace();
-           }
-
+//        else {
+//           try {
+//
+//               Driver dn = driverDao.queryById(id);
+//               return dn;
+//           } catch (SQLException e) {
+//               e.printStackTrace();
+//           }
+          return null;
        }
 //       String command = "/smartskips/driver/mobileLogin?username="+username+"&password="+password;
            // String json= HttpURLConnectionPost.PostLogin(username, password);
@@ -126,8 +126,7 @@ public class Repository {
 //       System.out.println(json);
 //       Driver d = (Driver) JsonUtil.json2obj(json,Driver.class);
 
-          return  null;
-       }
+ 
 
 
    public static Driver getDriverDetails(Context context, int id){
