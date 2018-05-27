@@ -94,24 +94,24 @@ public class Repository {
     }
 
 
-    public static Driver login(String username, String password) {
-        //driverDao=new SSDao<>(context,Driver.class);
-        //if(NetUtil.isNetworkAvailable(context)==TRUE) {
-        //String command = "/smartskips/driver/mobileLogin?username="+username+"&password="+password;
-        String json = HttpURLConnectionPost.PostLogin(username, password);
+    public static Driver login(Context context,String username, String password) {
+        driverDao = new SSDao<>(context, Driver.class);
+        if (NetUtil.isNetworkAvailable(context) == TRUE) {
+            //String command = "/smartskips/driver/mobileLogin?username="+username+"&password="+password;
+            String json = HttpURLConnectionPost.PostLogin(username, password);
 
-        //if ("admin1".equals(username) && "sdsdgcCcDFKsd.77578.sdfkd".equals(password)) {
+            //if ("admin1".equals(username) && "sdsdgcCcDFKsd.77578.sdfkd".equals(password)) {
 //           InputStream input = context.getResources().openRawResource(R.raw.driver);
 //       String json=txt2string(input);
-        Driver dn = (Driver) JsonUtil.json2obj(json, Driver.class);
-        try {
-            driverDao.deleteById(1);
-            driverDao.save(dn);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            Driver dn = (Driver) JsonUtil.json2obj(json, Driver.class);
+            try {
+                driverDao.deleteById(1);
+                driverDao.save(dn);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return dn;
         }
-        return dn;
-    }
 ////        else {
 ////           try {
 ////
@@ -122,12 +122,13 @@ public class Repository {
 ////           }
 
 //       String command = "/smartskips/driver/mobileLogin?username="+username+"&password="+password;
-    // String json= HttpURLConnectionPost.PostLogin(username, password);
+        // String json= HttpURLConnectionPost.PostLogin(username, password);
 //       String json= WebServiceGet.executeHttpGet(command);
 //       System.out.println(json);
 //       Driver d = (Driver) JsonUtil.json2obj(json,Driver.class);
 
-
+        return null;
+    }
 
 
    public static Driver getDriverDetails(Context context, int id){
