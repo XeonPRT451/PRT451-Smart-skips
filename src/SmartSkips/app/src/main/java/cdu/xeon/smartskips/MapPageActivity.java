@@ -157,24 +157,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         mapView=findViewById(R.id.mapView1);
         mapView.setBackgroundColor(0000);
 
-        findViewById(R.id.btnStartAnotherAty).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MapPageActivity.this,SkipDetails.class));
-            }
-        });
-        findViewById(R.id.userProfileButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(MapPageActivity.this,UserProfile.class );
-                startActivity(intent);
-                int version = Integer.valueOf(android.os.Build.VERSION.SDK);
-                if(version >= 5) {
-                    overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
-                }
-            }
-        });
+
     }
 
 //    preparing the map
@@ -314,8 +297,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                 }
             });
 
-            Intent intent = getIntent();
-            String markerTitle= intent.getExtras().getString("markertitle");
+
 
 
 
@@ -573,18 +555,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
 
 
 
-        findViewById(R.id.userProfileButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(MapPageActivity.this,UserProfile.class );
-                startActivity(intent);
-                int version = Integer.valueOf(android.os.Build.VERSION.SDK);
-                if(version >= 5) {
-                    overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
-                }
-            }
-        });
+
 
     }
 
