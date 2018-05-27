@@ -47,7 +47,7 @@ public class SkipDetails extends LifecycleLoggingActivity {
       Bundle bundle=getIntent().getBundleExtra("bundle");
       String ID=bundle.getString("ID");
       System.out.println(ID);
-      id= Integer.parseInt(ID.substring(1));
+      id= Integer.parseInt(ID.substring(3));
 System.out.println(id);
         Skip skip=Repository.getSkip(getApplicationContext()).get(id);
         mListStr[0]=Integer.toString(id);

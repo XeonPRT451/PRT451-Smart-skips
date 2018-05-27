@@ -299,7 +299,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                     String title = marker.getTitle();
                     intent1.putExtra("markertitle", title);
                     Bundle bundle=new Bundle();
-                    bundle.putString("ID",marker.getId());
+                    bundle.putString("ID",marker.getTitle());
                     intent1.putExtra("bundle",bundle);
                     startActivity(intent1);
                 }
