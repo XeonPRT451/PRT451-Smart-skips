@@ -47,7 +47,8 @@ public class Skip implements Serializable {
     @DatabaseField(columnName = "latitude")
     private double latitude;
 
-
+    @DatabaseField(columnName = "count")
+    private int count;
      public Skip()
      {
      }
@@ -147,6 +148,11 @@ public class Skip implements Serializable {
         this.latitude = latitude;
     }
 
+    public int getCount() {
+        return count;
+    }
 
-
+    public void setCount(int count) {
+        this.count = count;
+    }
 }
