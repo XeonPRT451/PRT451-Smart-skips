@@ -106,7 +106,7 @@ public class Repository {
             Driver dn = (Driver) JsonUtil.json2obj(json, Driver.class);
             try {
 
-                driverDao.update(dn);
+                driverDao.saveOrUpdate(dn);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
