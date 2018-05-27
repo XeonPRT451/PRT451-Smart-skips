@@ -95,7 +95,7 @@ public class Repository {
 
    public static Driver login( Context context,String username, String password) {
        driverDao=new SSDao<>(context,Driver.class);
-       if(NetUtil.isNetworkAvailable(context)==TRUE){
+//       if(NetUtil.isNetworkAvailable(context)==TRUE){
        //String command = "/smartskips/driver/mobileLogin?username="+username+"&password="+password;
         String json= HttpURLConnectionPost.PostLogin(username, password);
 
@@ -109,16 +109,16 @@ public class Repository {
                e.printStackTrace();
            }
            return dn;
-       }
-//        else {
-//           try {
-//
-//               Driver dn = driverDao.queryById(id);
-//               return dn;
-//           } catch (SQLException e) {
-//               e.printStackTrace();
-//           }
-          return null;
+//       }
+////        else {
+////           try {
+////
+////               Driver dn = driverDao.queryById(id);
+////               return dn;
+////           } catch (SQLException e) {
+////               e.printStackTrace();
+////           }
+//          return null;
        }
 //       String command = "/smartskips/driver/mobileLogin?username="+username+"&password="+password;
            // String json= HttpURLConnectionPost.PostLogin(username, password);

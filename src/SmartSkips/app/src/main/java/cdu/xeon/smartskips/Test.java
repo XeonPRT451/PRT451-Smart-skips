@@ -48,7 +48,7 @@ public class Test extends ListActivity {
             mData.add(item);
         }
         SimpleAdapter adapter = new SimpleAdapter(this,mData,R.layout.item,
-                new String[]{"image","title","text"},new int[]{R.id.image,R.id.title,R.id.text});
+                new String[]{"title","text"},new int[]{R.id.image,R.id.title,R.id.text});
         setListAdapter(adapter);
 
         super.onCreate(savedInstanceState);

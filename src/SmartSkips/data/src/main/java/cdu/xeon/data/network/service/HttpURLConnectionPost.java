@@ -18,7 +18,7 @@ public class HttpURLConnectionPost {
 
 
 
-        System.out.println(doJsonPost("http://127.0.0.1:8888/smartskips/driver/mobileLogin"));
+        System.out.println(doJsonPost("http://192.168.253.1:8888/smartskips/driver/mobileLogin"));
     }
 
 

@@ -39,7 +39,7 @@ public class UserProfile extends LifecycleLoggingActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userprofile);
         Driver driver = new Driver();
-        driver = Repository.getDriverDetails(this);
+        driver = Repository.getDriverDetails(this,1);
         mListStr[0]=driver.getUsername();
         mListStr[1]=driver.getPhone();
         mListStr[2]=driver.getEmail();
