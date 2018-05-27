@@ -23,6 +23,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -34,19 +35,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+
+
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -72,6 +73,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 
 import cdu.xeon.data.mapmodules.Route;
 import cdu.xeon.data.mapmodules.DirectionFinder;
@@ -103,7 +110,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -114,319 +120,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-//    public class MapPageActivity extends FragmentActivity implements OnMapReadyCallback {
-//
-//        private MapView mapView;
-//    private static final String TAG = "MapActivity";
-//    private static final int ERROR_DIALOG_REQUEST = 9001;
-//    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-//    private static final float DEFAULT_ZOOM = 15f;
-//    private static final int LOCATION_REQUEST = 500;
-//    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-//    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-//    private FusedLocationProviderClient mFusedLocationProviderClient;
-//
-//    //variables for checking for permission
-//    private Boolean mLocationPermissionsGranted = false;
-//    private GoogleMap mMap;
-//
-//        ArrayList<LatLng> listPoints;
-//        @Override
-//        protected void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            setContentView(R.layout.activity_mappage);
-//            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                    .findFragmentById(R.id.map);
-//            mapFragment.getMapAsync(this);
-//            listPoints = new ArrayList<>();
-//        }
-//
-//        @Override
-//        public void onMapReady(GoogleMap googleMap) {
-//            mMap = googleMap;
-//            Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
-//            Log.d(TAG, "onMapReady: map is ready");
-//            mMap.getUiSettings().setZoomControlsEnabled(true);
-//            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
-//                return;
-//            }
-//            getDeviceLocation();
-////            ((TextView) findViewById(R.id.tvDuration)).setText(route.duration.text);
-////            ((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
-//
-//            LatLng skip1 = new LatLng(-12.374196, 130.868760);
-//            mMap.addMarker(new MarkerOptions().position(skip1)
-//                    .title("skip 1"));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip1));
-//
-//            LatLng skip2 = new LatLng(-12.366347, 130.877126);
-//            mMap.addMarker(new MarkerOptions().position(skip2)
-//                    .title("Skip 2"));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip2));
-//
-//
-//            LatLng skip3 = new LatLng(-11.366347, 130.877126);
-//            mMap.addMarker(new MarkerOptions().position(skip2)
-//                    .title("Skip 3"));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip2));
-//
-//            mMap.setMyLocationEnabled(true);
-//            mMap.getUiSettings().setMyLocationButtonEnabled(true);
-//            mMap.getUiSettings().isMapToolbarEnabled();
-//            mMap.getUiSettings().setScrollGesturesEnabled(true);
-//            mMap.getUiSettings().isRotateGesturesEnabled();
-//            mMap.getUiSettings().setZoomControlsEnabled(true);
-//            mMap.getUiSettings().setMyLocationButtonEnabled(true);
-//
-//
-//            findViewById(R.id.btnStartAnotherAty).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(MapPageActivity.this,SkipDetails.class));
-//            }
-//        });
-
-//        findViewById(R.id.userProfileButton).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent();
-//                intent.setClass(MapPageActivity.this,UserProfile.class );
-//                startActivity(intent);
-//                int version = Integer.valueOf(android.os.Build.VERSION.SDK);
-////                if(version >= 5) {
-////                    overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
-////                }
-//            }
-//        });
-//
-//            mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-//                @Override
-//                public void onMapLongClick(LatLng latLng) {
-//                    //Reset marker when already 2
-//                    if (listPoints.size() == 2) {
-//                        listPoints.clear();
-//                        mMap.clear();
-//                    }
-//                    //Save first point select
-//                    listPoints.add(latLng);
-//                    //Create marker
-//                    MarkerOptions markerOptions = new MarkerOptions();
-//                    markerOptions.position(latLng);
-//
-//                    if (listPoints.size() == 1) {
-//                        //Add first marker to the map
-//                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-//                    } else {
-//                        //Add second marker to the map
-//                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-//                    }
-//                    mMap.addMarker(markerOptions);
-//
-//                    if (listPoints.size() == 2) {
-//                        //Create the URL to get request from first marker to second marker
-//                        String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
-//                        cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections taskRequestDirections = new cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections();
-//                        taskRequestDirections.execute(url);
-//                    }
-//                }
-//            });
-//
-//        }
-//
-//
-//        // getting device's location
-//    private void getDeviceLocation(){
-//        Log.d(TAG, "getDeviceLocation: getting the devices current location");
-//
-//        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-//
-//        try{
-//            if(mLocationPermissionsGranted){
-//
-//                final Task location = mFusedLocationProviderClient.getLastLocation();
-//                location.addOnCompleteListener(new OnCompleteListener() {
-//                    @Override
-//                    public void onComplete(@NonNull Task task) {
-//                        if(task.isSuccessful()){
-//                            Log.d(TAG, "onComplete: found location!");
-//                            Location currentLocation = (Location) task.getResult();
-//
-//                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-//                                    DEFAULT_ZOOM,
-//                                    "Driver Location");
-//
-//                        }else{
-//                            Log.d(TAG, "onComplete: current location is null");
-//                            Toast.makeText(MapPageActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//            }
-//        }catch (SecurityException e){
-//            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
-//        }
-//    }
-//
-//        //camera movement
-//    private void moveCamera(LatLng latLng, float zoom, String title){
-//        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-//
-//        if(!title.equals("My Location")){
-//            MarkerOptions options = new MarkerOptions()
-//                    .position(latLng)
-//                    .title(title);
-//            mMap.addMarker(options);
-//        }
-//    }
-//
-//
-//        private String getRequestUrl(LatLng origin, LatLng dest) {
-//            //Value of origin
-//            String str_org = "origin=" + origin.latitude +","+origin.longitude;
-//            //Value of destination
-//            String str_dest = "destination=" + dest.latitude+","+dest.longitude;
-//            //Set value enable the sensor
-//            String sensor = "sensor=false";
-//            //Mode for find direction
-//            String mode = "mode=driving";
-//            //Build the full param
-//            String param = str_org +"&" + str_dest + "&" +sensor+"&" +mode;
-//            //Output format
-//            String output = "json";
-//            //Create url to request
-//            String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + param;
-//            return url;
-//        }
-//
-//        private String requestDirection(String reqUrl) throws IOException {
-//            String responseString = "";
-//            InputStream inputStream = null;
-//            HttpURLConnection httpURLConnection = null;
-//            try{
-//                URL url = new URL(reqUrl);
-//                httpURLConnection = (HttpURLConnection) url.openConnection();
-//                httpURLConnection.connect();
-//
-//                //Get the response result
-//                inputStream = httpURLConnection.getInputStream();
-//                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-//                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//
-//                StringBuffer stringBuffer = new StringBuffer();
-//                String line = "";
-//                while ((line = bufferedReader.readLine()) != null) {
-//                    stringBuffer.append(line);
-//                }
-//
-//                responseString = stringBuffer.toString();
-//                bufferedReader.close();
-//                inputStreamReader.close();
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (inputStream != null) {
-//                    inputStream.close();
-//                }
-//                httpURLConnection.disconnect();
-//            }
-//            return responseString;
-//        }
-//
-//        @SuppressLint("MissingPermission")
-//        @Override
-//        public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//            switch (requestCode){
-//                case LOCATION_REQUEST:
-//                    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                        mMap.setMyLocationEnabled(true);
-//                    }
-//                    break;
-//            }
-//        }
-//
-//        public class TaskRequestDirections extends AsyncTask<String, Void, String> {
-//
-//            @Override
-//            protected String doInBackground(String... strings) {
-//                String responseString = "";
-//                try {
-//                    responseString = requestDirection(strings[0]);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                return  responseString;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(String s) {
-//                super.onPostExecute(s);
-//                //Parse json here
-//                cdu.xeon.smartskips.MapPageActivity.TaskParser taskParser = new cdu.xeon.smartskips.MapPageActivity.TaskParser();
-//                taskParser.execute(s);
-//            }
-//        }
-//
-//        public class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>> > {
-//
-//            @Override
-//            protected List<List<HashMap<String, String>>> doInBackground(String... strings) {
-//                JSONObject jsonObject = null;
-//                List<List<HashMap<String, String>>> routes = null;
-//                try {
-//                    jsonObject = new JSONObject(strings[0]);
-//                    DirectionParser directionsParser = new DirectionParser();
-//                    routes = directionsParser.parse(jsonObject);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                return routes;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(List<List<HashMap<String, String>>> lists) {
-//                //Get list route and display it into the map
-//
-//                ArrayList points = null;
-//
-//                PolylineOptions polylineOptions = null;
-//
-//                for (List<HashMap<String, String>> path : lists) {
-//                    points = new ArrayList();
-//                    polylineOptions = new PolylineOptions();
-//
-//                    for (HashMap<String, String> point : path) {
-//                        double lat = Double.parseDouble(point.get("lat"));
-//                        double lon = Double.parseDouble(point.get("lon"));
-//
-//                        points.add(new LatLng(lat,lon));
-//                    }
-//
-//                    polylineOptions.addAll(points);
-//                    polylineOptions.width(15);
-//                    polylineOptions.color(Color.BLUE);
-//                    polylineOptions.geodesic(true);
-//                }
-//
-//                if (polylineOptions!=null) {
-//                    mMap.addPolyline(polylineOptions);
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Direction not found!", Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        }
-//    }
-
-
-
-
-
-
 
 
 public class MapPageActivity extends AppCompatActivity implements OnMapReadyCallback{
@@ -445,6 +138,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     //variables for checking for permission
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
+    private Marker mMarker;
 
     ArrayList<LatLng> listPoints;
 //     on creating the application
@@ -457,9 +151,6 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-//        if(isServiceOK()){
-//            init();
-//        }
         getLocationPermission();
         updateLocationUI();
 
@@ -492,70 +183,85 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        GoogleMapOptions options = new GoogleMapOptions();
+//
+        options.mapType(GoogleMap.MAP_TYPE_SATELLITE)
+            .compassEnabled(false)
+            .rotateGesturesEnabled(false)
+                .tiltGesturesEnabled(false);
 
-//        List<Skip> ss=Repository.getSkip(getApplicationContext());
-//          String first = ss.get(1).getName();
 
         if (mLocationPermissionsGranted) {
             getDeviceLocation();
 //            getGeolocation();
 
+            // skip 6
             String skip6N = Repository.getSkip(this).get(5).getName();
             double lat6 = Repository.getSkip(this).get(5).getLatitude();
             double lng6 = Repository.getSkip(this).get(5).getLongitude();
-
-//            lat6 = (-12.366347);
-////          lng6 =(130.877126);
-
             LatLng skip6L = new LatLng(lat6, lng6);
             mMap.addMarker(new MarkerOptions().position(skip6L)
-                    .title(skip6N));
+                    .title(skip6N)
+                    .snippet("click for more details"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip6L));
 
 
-
+            //skip 5
             String skip5N = Repository.getSkip(this).get(4).getName();
             double lat5 = Repository.getSkip(this).get(4).getLatitude();
             double lng5 = Repository.getSkip(this).get(4).getLongitude();
             LatLng skip5L = new LatLng(lat5, lng5);
             mMap.addMarker(new MarkerOptions().position(skip5L)
-                    .title(skip5N));
+                    .title(skip5N)
+                    .snippet("click for more details"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip5L));
 
-
+            //skip 4
             String skip4N = Repository.getSkip(this).get(3).getName();
             double lat4 = Repository.getSkip(this).get(3).getLatitude();
             double lng4 = Repository.getSkip(this).get(3).getLongitude();
             LatLng skip4L = new LatLng(lat4, lng4);
             mMap.addMarker(new MarkerOptions().position(skip4L)
-                    .title(skip4N));
+                    .title(skip4N)
+                    .snippet("click for more details"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip4L));
 
 
-
+            //skip 3
             String skip3N = Repository.getSkip(this).get(2).getName();
             double lat3 = Repository.getSkip(this).get(2).getLatitude();
             double lng3 = Repository.getSkip(this).get(2).getLongitude();
             LatLng skip3L = new LatLng(lat3, lng3);
             mMap.addMarker(new MarkerOptions().position(skip3L)
-                    .title(skip3N));
+                    .title(skip3N)
+                    .snippet("click for more details"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip3L));
 
-
-
+            //skip 2
             String skip2N = Repository.getSkip(this).get(1).getName();
             double lat2 = Repository.getSkip(this).get(1).getLatitude();
             double lng2 = Repository.getSkip(this).get(1).getLongitude();
             LatLng skip2L = new LatLng(lat2, lng2);
+
             mMap.addMarker(new MarkerOptions().position(skip2L)
-                    .title(skip2N));
+                    .title(skip2N)
+                    .snippet("click for more details"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip2L));
 
 
+//            mMap.addMarker(new MarkerOptions().position(skip2L)
+//                    .title(skip2N))
+//                    .snippet("click for more details"));
+////                    .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip2L));
+
+            //skip 1
             String skip1N = Repository.getSkip(this).get(0).getName();
             double lat1 = Repository.getSkip(this).get(0).getLatitude();
             double lng1 = Repository.getSkip(this).get(0).getLongitude();
             LatLng skip1L = new LatLng(lat1, lng1);
+
             mMap.addMarker(new MarkerOptions().position(skip1L)
                     .title(skip1N));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip1L));
@@ -565,6 +271,53 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
 //                    .title("Skip 2"));
 //            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip2));
 
+//            String skiptitle = "click For more skip details";
+//            String skipID = "ID: 12587";
+
+            String title = "This is Title";
+            String subTitle = "This is \nSubtitle";
+            //Marker
+            MarkerOptions markerOpt = new MarkerOptions();
+            markerOpt.position(new LatLng(-12.366347, 130.877126))
+                    .title(title)
+                    .snippet(subTitle)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue));
+
+            //Set Custom InfoWindow Adapter
+            CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(MapPageActivity.this);
+            mMap.setInfoWindowAdapter(adapter);
+            mMap.addMarker(markerOpt).showInfoWindow();
+
+
+
+
+            //landfill
+            String landfill  = Repository.getLandfill(this).get(0).getName();
+            double latland = Repository.getLandfill(this).get(0).getLatitude();
+            double lngland = Repository.getLandfill(this).get(0).getLongitude();
+            LatLng lndfillpos = new LatLng(latland, lngland);
+            mMap.addMarker(new MarkerOptions().position(lndfillpos)
+                    .title(landfill)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.plowtruck)));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(lndfillpos));
+
+
+
+
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    Intent intent1 = new Intent(MapPageActivity.this, SkipDetails.class);
+                    String title = marker.getTitle();
+                    intent1.putExtra("markertitle", title);
+                    startActivity(intent1);
+                }
+            });
+
+            Intent intent = getIntent();
+            String markerTitle= intent.getExtras().getString("markertitle");
+
+
 
             mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
                 @Override
@@ -572,7 +325,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                     //Reset marker when already 2
                     if (listPoints.size() == 2) {
                         listPoints.clear();
-//                        mMap.clear();
+                        mMap.clear();
                     }
                     //Save first point select
                     listPoints.add(latLng);
@@ -614,22 +367,29 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
 
         }
     }
-
-        public void getGeolocation() {
-
-//            // initialize and set skip location
-            String skip6N = Repository.getSkip(this).get(5).getName();
-            double lat = Repository.getSkip(this).get(5).getLatitude();
-            double lng = Repository.getSkip(this).get(5).getLongitude();
-
-            LatLng skip6L = new LatLng(lat, lng);
-            mMap.addMarker(new MarkerOptions().position(skip6L)
-                    .title(skip6N));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip6L));
-
-
-        }
+//        public void getGeolocation() {
 //
+////            // initialize and set skip location
+//            String skip6N = Repository.getSkip(this).get(5).getName();
+//            double lat = Repository.getSkip(this).get(5).getLatitude();
+//            double lng = Repository.getSkip(this).get(5).getLongitude();
+//
+//            LatLng skip6L = new LatLng(lat, lng);
+//            mMap.addMarker(new MarkerOptions().position(skip6L)
+//                    .title(skip6N));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(skip6L));
+//        }
+//
+
+//    public void getinfowindow(){
+////
+////        Marker melbourne = mMap.addMarker(new MarkerOptions()
+////                .position()
+////                .title("Melbourne")
+////                .snippet("Population: 4,137,400"));
+////
+////    }
+
     // getting device's location
     private void getDeviceLocation(){
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
@@ -640,24 +400,23 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             if(mLocationPermissionsGranted){
 
                  Task location = mFusedLocationProviderClient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
+                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if(task.isSuccessful()){
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
 
-                            MarkerOptions marker = new MarkerOptions().position(new LatLng(currentLocation.getLatitude(),
-                                    currentLocation.getLongitude())).title("Driver Location");
-//                            marker.getIcon().
-                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.plowtruck));
-                            mMap.addMarker(marker);
+//                            MarkerOptions marker = new MarkerOptions().position(new LatLng(currentLocation.getLatitude(),
+//                                    currentLocation.getLongitude())).title("Driver Location");
+////                            marker.getIcon().
+//                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.plowtruck));
+//                            mMap.addMarker(marker);
 
 
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM,
                                     "Driver Location");
-
                         }else{
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(MapPageActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
@@ -678,10 +437,17 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         if(!title.equals("My Location")){
             MarkerOptions options = new MarkerOptions()
                     .position(latLng)
-                    .title(title);
+                    .title(title)
+                    ;
             mMap.addMarker(options);
         }
     }
+
+
+
+
+
+
 //updating location
     private void updateLocationUI() {
         if (mMap == null) {
@@ -703,6 +469,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             Log.e("Exception: %s", e.getMessage());
         }
     }
+
 
 //    //initialisation process
 //    private void init(){
@@ -927,7 +694,6 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                     for (HashMap<String, String> point : path) {
                         double lat = Double.parseDouble(point.get("lat"));
                         double lon = Double.parseDouble(point.get("lon"));
-
                         points.add(new LatLng(lat,lon));
                     }
 
