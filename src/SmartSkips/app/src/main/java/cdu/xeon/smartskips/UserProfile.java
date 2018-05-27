@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.DrawableRes;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,10 @@ public class UserProfile extends LifecycleLoggingActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userprofile);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         Driver driver = new Driver();
         driver = Repository.getDriverDetails(this,1);
         mListStr[0]=driver.getUsername();

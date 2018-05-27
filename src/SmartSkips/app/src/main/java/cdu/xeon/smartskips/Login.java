@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.ColorInt;
 import android.view.View;
 import android.widget.EditText;
@@ -29,6 +30,10 @@ Driver driver= new Driver();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         userNameEditText=findViewById(R.id.nameEditText);
         passWordEditText=findViewById(R.id.passwordEditText);
         reminder=findViewById(R.id.remindTextView);
@@ -39,7 +44,7 @@ Driver driver= new Driver();
         findViewById(R.id.loginButton).setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                driver = Repository.login(getApplicationContext(),userNameEditText.getText().toString(),passWordEditText.getText().toString());
+                driver = Repository.login(userNameEditText.getText().toString(),passWordEditText.getText().toString());
                 SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
 
                 //输入错误时的时间,如果为空的话就取0L

@@ -93,9 +93,9 @@ public class Repository {
        }
 
 
-   public static Driver login( Context context,String username, String password) {
-       driverDao=new SSDao<>(context,Driver.class);
-//       if(NetUtil.isNetworkAvailable(context)==TRUE){
+   public static Driver login( String username, String password) {
+       //driverDao=new SSDao<>(context,Driver.class);
+      //if(NetUtil.isNetworkAvailable(context)==TRUE) {
        //String command = "/smartskips/driver/mobileLogin?username="+username+"&password="+password;
         String json= HttpURLConnectionPost.PostLogin(username, password);
 
@@ -103,13 +103,13 @@ public class Repository {
 //           InputStream input = context.getResources().openRawResource(R.raw.driver);
 //       String json=txt2string(input);
         Driver dn = (Driver) JsonUtil.json2obj(json,Driver.class);
-           try {
-               driverDao.save(dn);
-           } catch (SQLException e) {
-               e.printStackTrace();
-           }
+//           try {
+//               driverDao.save(dn);
+//           } catch (SQLException e) {
+//               e.printStackTrace();
+//           }
            return dn;
-//       }
+      }
 ////        else {
 ////           try {
 ////
@@ -118,8 +118,7 @@ public class Repository {
 ////           } catch (SQLException e) {
 ////               e.printStackTrace();
 ////           }
-//          return null;
-       }
+
 //       String command = "/smartskips/driver/mobileLogin?username="+username+"&password="+password;
            // String json= HttpURLConnectionPost.PostLogin(username, password);
 //       String json= WebServiceGet.executeHttpGet(command);
