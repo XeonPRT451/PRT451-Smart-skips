@@ -29,6 +29,10 @@ public class SkipDetails extends LifecycleLoggingActivity {
     private String[] mListStr = new  String[3];
     ArrayList<Map<String,Object>> mData= new ArrayList<Map<String,Object>>();;
     ListView listView;
+    int id=0;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +46,8 @@ public class SkipDetails extends LifecycleLoggingActivity {
         listView=findViewById(R.id.skipList);
         Bundle bundle=getIntent().getBundleExtra("bundle");
         String ID=bundle.getString("ID");
-        final int id= Integer.parseInt(ID.substring(0));
-
-        final Skip skip=Repository.getSkip(this).get(id);
+        id= Integer.parseInt(ID.substring(0));
+        Skip skip=Repository.getSkip(getApplicationContext()).get(id);
         mListStr[0]=Integer.toString(id);
        if(skip.getStatus()==1){
            mListStr[1]="Full";
