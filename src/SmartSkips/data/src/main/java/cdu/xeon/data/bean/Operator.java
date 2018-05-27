@@ -4,6 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2/04/2018.
@@ -16,24 +17,30 @@ public class Operator implements Serializable {
     @DatabaseField(generatedId = true)
     private int id;
 
-    @DatabaseField(columnName = "name")
-    private String name;
-    public static final int MALE =0;
-    public static final int FEMALE =1;
-    //male:0   female:1
-    @DatabaseField(columnName = "gender")
-    private int gender;
+    @DatabaseField(columnName = "username")
+    private String username;
 
-    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true,columnName = "landfill_id")
-    private Landfill landfill;
+    @DatabaseField(columnName = "nickname")
+    private String nickname;
+    @DatabaseField(columnName = "email")
+    private String email;
+    @DatabaseField(columnName = "phone")
+    private String phone;
+    @DatabaseField(columnName = "status")
+    private int status;
+    @DatabaseField(columnName = "create_date")
+    private Date createDate;
+    @DatabaseField(columnName = "onduty")
+    private int onduty;
+    @DatabaseField(columnName = "lname")
+    private String lname;
+    @DatabaseField(columnName="lid")
+    private int lid;
 
     public Operator() {
     }
 
-    public Operator(String name, Landfill landfill) {
-        this.name = name;
-        this.landfill = landfill;
-    }
+
 
     public int getId() {
         return id;
@@ -43,27 +50,75 @@ public class Operator implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public int getGender() {
-        return gender;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setGender(int gender) {
-        this.gender = gender;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public Landfill getLandfill() {
-        return landfill;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLandfill(Landfill landfill) {
-        this.landfill = landfill;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public int getOnduty() {
+        return onduty;
+    }
+
+    public void setOnduty(int onduty) {
+        this.onduty = onduty;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public int getLid() {
+        return lid;
+    }
+
+    public void setLid(int lid) {
+        this.lid = lid;
     }
 }
