@@ -44,7 +44,7 @@ Driver driver= new Driver();
         findViewById(R.id.loginButton).setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                driver = Repository.login(userNameEditText.getText().toString(),passWordEditText.getText().toString());
+
                 SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
 
                 //输入错误时的时间,如果为空的话就取0L
@@ -57,6 +57,7 @@ Driver driver= new Driver();
                     if (userNameEditText.getText().toString().trim().equals("") ||passWordEditText.getText().toString().trim().equals("") ){
                         Toast.makeText(Login.this, "Please Input Username or Password！", Toast.LENGTH_LONG).show();
                     }else {
+                        driver = Repository.login(userNameEditText.getText().toString(),passWordEditText.getText().toString());
 
                         if (driver == null) {
                             count--;
