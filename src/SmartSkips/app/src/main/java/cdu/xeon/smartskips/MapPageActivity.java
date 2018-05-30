@@ -305,7 +305,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             landfillpos1=lndfillpos;
             mMap.addMarker(new MarkerOptions().position(lndfillpos)
                     .title(landfill)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.bin)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.landfill)));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(lndfillpos));
 
 
