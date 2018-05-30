@@ -81,6 +81,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
+import cdu.xeon.data.bean.Driver;
 import cdu.xeon.data.mapmodules.Route;
 import cdu.xeon.data.mapmodules.DirectionFinder;
 import cdu.xeon.data.mapmodules.DirectionFinderListener;
@@ -127,6 +128,7 @@ import java.util.Map;
 public class MapPageActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     // initialisation of the variables
+    private Driver driver;
     private MapView mapView;
     private static final String TAG = "MapActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
@@ -153,6 +155,7 @@ public static MapPageActivity instance =null;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mappage);
+        driver=Repository.getDriverDetails(this,1);
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -168,7 +171,21 @@ public static MapPageActivity instance =null;
             lng = bundle.getDouble("lon");
         }
 
+        findViewById(R.id.empBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             driver=Repository.getDriverDetails(getApplicationContext(),1);
+               String stau= Repository.emptySkip(getApplicationContext(),driver.getId(),1);
+                driver=Repository.getDriverDetails(getApplicationContext(),1);
+                if (driver.getLoaded()==0){
+                    Toast.makeText(getApplicationContext(), "Skip empty successfully!", Toast.LENGTH_LONG).show();
+                }else if (driver.getLoaded()==1){
+                    Toast.makeText(getApplicationContext(), "Skip empty failed!", Toast.LENGTH_LONG).show();
+                }
 
+
+            }
+        });
 
 
 
@@ -215,7 +232,7 @@ public static MapPageActivity instance =null;
                     .title(skip6N)
                     .snippet("click for more details"));
             if (Repository.getSkip(this).get(5).getFull()==0){
-                marker6.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+                marker6.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
             }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip6L));
 
@@ -230,7 +247,7 @@ public static MapPageActivity instance =null;
                     .title(skip5N)
                     .snippet("click for more details"));
             if (Repository.getSkip(this).get(4).getFull()==0){
-                marker5.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+                marker5.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
             }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip5L));
 
@@ -244,7 +261,7 @@ public static MapPageActivity instance =null;
                     .title(skip4N)
                     .snippet("click for more details"));
             if (Repository.getSkip(this).get(0).getFull()==0){
-                marker4.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+                marker4.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
             }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip4L));
 
@@ -259,7 +276,7 @@ public static MapPageActivity instance =null;
                     .title(skip3N)
                     .snippet("click for more details"));
             if (Repository.getSkip(this).get(2).getFull()==0){
-                marker3.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+                marker3.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
             }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip3L));
 
@@ -273,7 +290,7 @@ public static MapPageActivity instance =null;
                     .title(skip2N)
                     .snippet("click for more details"));
             if (Repository.getSkip(this).get(1).getFull()==0){
-                marker2.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+                marker2.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
             }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip2L));
 
@@ -292,7 +309,7 @@ public static MapPageActivity instance =null;
             marker1= mMap.addMarker(new MarkerOptions().position(skip1L)
                     .title(skip1N));
             if (Repository.getSkip(this).get(0).getFull()==0){
-                marker1.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+                marker1.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
             }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip1L));
 
