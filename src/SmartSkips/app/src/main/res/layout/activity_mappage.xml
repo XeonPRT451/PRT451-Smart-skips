@@ -11,7 +11,7 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView1"
         android:layout_width="153dp"
-        android:layout_height="472dp"
+        android:layout_height="375dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -42,8 +42,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="393dp"
-        android:layout_height="504dp"
+        android:layout_width="353dp"
+        android:layout_height="455dp"
         android:layout_marginBottom="70dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="8dp"
@@ -51,10 +51,10 @@
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.809"
         tools:context=".MapPageActivity" />
 
     <!--<Button-->

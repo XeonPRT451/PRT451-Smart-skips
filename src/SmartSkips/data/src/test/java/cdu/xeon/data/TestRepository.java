@@ -11,13 +11,13 @@ import cdu.xeon.data.repository.Repository;
 
 public class TestRepository {
 
-    @Test
-    public void testLogin(){
-     Driver da=Repository.login("admin1","123456" );
-     Driver dr=new Driver();
-     dr.setPhone("0410454232");
-        Assert.assertEquals(da.getPhone(),dr.getPhone());
-    }
+//   TestRepository @Test
+//    public void testLogin(){
+//     Driver da=Repository.login("admin1","123456" );
+//     Driver dr=new Driver();
+//     dr.setPhone("0410454232");
+//        Assert.assertEquals(da.getPhone(),dr.getPhone());
+//    }
 //
 //    @Test
 //    public void testGetSkip(){
