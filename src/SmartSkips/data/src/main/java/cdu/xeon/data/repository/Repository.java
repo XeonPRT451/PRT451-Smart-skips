@@ -104,6 +104,9 @@ public class Repository {
 //           InputStream input = context.getResources().openRawResource(R.raw.driver);
 //       String json=txt2string(input);
             Driver dn = (Driver) JsonUtil.json2obj(json, Driver.class);
+            if(dn==null){
+                return null;
+            }
             try {
                 dn.setId(1);
                 driverDao.saveOrUpdate(dn);
