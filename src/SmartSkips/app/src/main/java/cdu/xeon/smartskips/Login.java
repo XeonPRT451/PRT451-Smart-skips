@@ -59,7 +59,7 @@ Driver driver= new Driver();
                     }else {
                         driver = Repository.login(Login.this,userNameEditText.getText().toString(),passWordEditText.getText().toString());
 
-                        if (driver == null) {
+                        if ( driver==null) {
                             count--;
                             Toast.makeText(Login.this, "you have" + " " + count + " " + "chance left！", Toast.LENGTH_LONG).show();
                             // reminder.setText("Login Fail");
