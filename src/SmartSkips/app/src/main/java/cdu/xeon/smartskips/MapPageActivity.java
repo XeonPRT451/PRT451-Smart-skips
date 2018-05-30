@@ -136,18 +136,18 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-
     //variables for checking for permission
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private Marker mMarker;
+    Marker marker1,marker2,marker3,marker4,marker5,marker6;
 
     ArrayList<LatLng> listPoints;
     private  double lat = 0.0;
     private double lng = 0.0;
 
     private LatLng landfillpos1;
-
+public static MapPageActivity instance =null;
 //     on creating the application
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -210,9 +210,13 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             double lat6 = Repository.getSkip(this).get(5).getLatitude();
             double lng6 = Repository.getSkip(this).get(5).getLongitude();
             LatLng skip6L = new LatLng(lat6, lng6);
-            mMap.addMarker(new MarkerOptions().position(skip6L)
+
+            marker6= mMap.addMarker(new MarkerOptions().position(skip6L)
                     .title(skip6N)
                     .snippet("click for more details"));
+            if (Repository.getSkip(this).get(5).getFull()==0){
+                marker6.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+            }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip6L));
 
 
@@ -221,9 +225,13 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             double lat5 = Repository.getSkip(this).get(4).getLatitude();
             double lng5 = Repository.getSkip(this).get(4).getLongitude();
             LatLng skip5L = new LatLng(lat5, lng5);
-            mMap.addMarker(new MarkerOptions().position(skip5L)
+
+           marker5= mMap.addMarker(new MarkerOptions().position(skip5L)
                     .title(skip5N)
                     .snippet("click for more details"));
+            if (Repository.getSkip(this).get(4).getFull()==0){
+                marker5.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+            }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip5L));
 
             //skip 4
@@ -231,9 +239,13 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             double lat4 = Repository.getSkip(this).get(3).getLatitude();
             double lng4 = Repository.getSkip(this).get(3).getLongitude();
             LatLng skip4L = new LatLng(lat4, lng4);
-            mMap.addMarker(new MarkerOptions().position(skip4L)
+
+           marker4= mMap.addMarker(new MarkerOptions().position(skip4L)
                     .title(skip4N)
                     .snippet("click for more details"));
+            if (Repository.getSkip(this).get(0).getFull()==0){
+                marker4.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+            }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip4L));
 
 
@@ -242,9 +254,13 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             double lat3 = Repository.getSkip(this).get(2).getLatitude();
             double lng3 = Repository.getSkip(this).get(2).getLongitude();
             LatLng skip3L = new LatLng(lat3, lng3);
-            mMap.addMarker(new MarkerOptions().position(skip3L)
+
+            marker3= mMap.addMarker(new MarkerOptions().position(skip3L)
                     .title(skip3N)
                     .snippet("click for more details"));
+            if (Repository.getSkip(this).get(2).getFull()==0){
+                marker3.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+            }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip3L));
 
             //skip 2
@@ -252,9 +268,13 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             double lat2 = Repository.getSkip(this).get(1).getLatitude();
             double lng2 = Repository.getSkip(this).get(1).getLongitude();
             LatLng skip2L = new LatLng(lat2, lng2);
-            mMap.addMarker(new MarkerOptions().position(skip2L)
+
+           marker2= mMap.addMarker(new MarkerOptions().position(skip2L)
                     .title(skip2N)
                     .snippet("click for more details"));
+            if (Repository.getSkip(this).get(1).getFull()==0){
+                marker2.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+            }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip2L));
 
 
@@ -269,9 +289,11 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             double lat1 = Repository.getSkip(this).get(0).getLatitude();
             double lng1 = Repository.getSkip(this).get(0).getLongitude();
             LatLng skip1L = new LatLng(lat1, lng1);
-
-            mMap.addMarker(new MarkerOptions().position(skip1L)
+            marker1= mMap.addMarker(new MarkerOptions().position(skip1L)
                     .title(skip1N));
+            if (Repository.getSkip(this).get(0).getFull()==0){
+                marker1.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green));
+            }
             mMap.moveCamera(CameraUpdateFactory.newLatLng(skip1L));
 
 //            LatLng skip2 = new LatLng(-12.366347, 130.877126);
@@ -308,7 +330,27 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.bin)));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(lndfillpos));
 
+            LatLng skipRoute = new LatLng(lat, lng);
 
+            //Save first point select
+            // listPoints.add(skipRoute);
+//                    //Create marker
+//                    MarkerOptions markerOptions = new MarkerOptions();
+//                    markerOptions.position(latLng);
+//
+//                    if (listPoints.size() == 1) {
+//                        //Add first marker to the map
+//                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//                    } else {
+//                        //Add second marker to the map
+//                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+//                    }
+//                    mMap.addMarker(markerOptions);
+            // if (listPoints.size() == 2) {
+            //Create the URL to get request from first marker to second marker
+            String url = getRequestUrl(landfillpos1, skipRoute);
+            cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections taskRequestDirections = new cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections();
+            taskRequestDirections.execute(url);
 
 
 
@@ -326,45 +368,24 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                         bundle.putString("ID",marker.getTitle());
                         intent1.putExtra("bundle",bundle);
                         startActivity(intent1);
-                    mMap.clear();
+                  // mMap.clear();
                 }
             });
 
 
-            mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-                @Override
-                public void onMapLongClick(LatLng latLng) {
+//            mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+//                @Override
+//                public void onMapLongClick(LatLng latLng) {
                     //Reset marker when already 2
-                    if (listPoints.size() == 2) {
-                        listPoints.clear();
-                        mMap.clear();
-                    }
-
-                    LatLng skipRoute = new LatLng(lat, lng);
-
-                    //Save first point select
-                    listPoints.add(skipRoute);
-//                    //Create marker
-//                    MarkerOptions markerOptions = new MarkerOptions();
-//                    markerOptions.position(latLng);
-//
-//                    if (listPoints.size() == 1) {
-//                        //Add first marker to the map
-//                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-//                    } else {
-//                        //Add second marker to the map
-//                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+//                    if (listPoints.size() == 2) {
+//                        listPoints.clear();
+//                        mMap.clear();
 //                    }
-//                    mMap.addMarker(markerOptions);
 
-                    if (listPoints.size() == 2) {
-                        //Create the URL to get request from first marker to second marker
-                        String url = getRequestUrl(landfillpos1, skipRoute);
-                        cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections taskRequestDirections = new cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections();
-                        taskRequestDirections.execute(url);
-                    }
-                }
-            });
+
+                  //  }
+//                }
+//            });
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,

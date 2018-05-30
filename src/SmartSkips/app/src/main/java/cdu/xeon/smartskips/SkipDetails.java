@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import cdu.xeon.data.repository.Repository;
 public class SkipDetails extends LifecycleLoggingActivity {
     TextView skipID;
     public static SkipDetails instance;
+    Button eptButton;
     SmsManager smsManager = SmsManager.getDefault();
     String content = "Hello World!";
     ArrayList<String> list = smsManager.divideMessage(content);
@@ -54,10 +56,10 @@ public class SkipDetails extends LifecycleLoggingActivity {
          aSkip=skip;
                // System.out.println(id););
         mListStr[0]=ID;
-       if(skip.getStatus()==1){
+       if(skip.getFull()==1){
            mListStr[1]="Full";
        }else {
-           mListStr[1]="Emperty";
+           mListStr[1]="Empty";
        }
         mListStr[2]=skip.getLocation();
 
@@ -96,12 +98,18 @@ public class SkipDetails extends LifecycleLoggingActivity {
                // startActivity(new Intent(SkipDetails.this,MapPageActivity.class));
             }
         });
+
+        eptButton=findViewById(R.id.empertyBtn);
+        if (aSkip.getFull()==0){
+            eptButton.setEnabled(false);
+        }
         findViewById(R.id.empertyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Driver driver=new Driver();
+                //MapPageActivity.instance.finish();
    driver=Repository.getDriverDetails(SkipDetails.this,1);
-                Repository.pickupSkip(SkipDetails.this,driver.getId(),id);
+                Repository.pickupSkip(SkipDetails.this,driver.getId(),aSkip.getId());
 
                 Intent intent=new Intent(SkipDetails.this, MapPageActivity.class);
                 Skip skip2=aSkip;
@@ -109,6 +117,7 @@ public class SkipDetails extends LifecycleLoggingActivity {
                 bundle.putDouble("lan",skip2.getLatitude());
                 bundle.putDouble("lon",skip2.getLongitude());
                 intent.putExtra("location",bundle);
+
                 startActivity(intent);
 
                 int version = Integer.valueOf(android.os.Build.VERSION.SDK);
