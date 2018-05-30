@@ -240,14 +240,14 @@ public class Repository {
 
             List<Skip> ls = (List<Skip>) JsonUtil.jsonToBeanList(json, Skip.class);
 
-        try {
-            for(Skip s:ls) {
-                skipDao.saveOrUpdate(s);
-                System.out.println(skipDao.queryAll());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            for(Skip s:ls) {
+//                skipDao.saveOrUpdate(s);
+//                System.out.println(skipDao.queryAll());
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 //            for (Skip s : ls) {
 //                try {
 //                    skipDao.save(s);
@@ -258,14 +258,14 @@ public class Repository {
 
             return ls;
         }
-        else{
-            try {
-                List<Skip> ls = skipDao.queryAll();
-                return ls;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+//        else{
+//            try {
+//                List<Skip> ls = skipDao.queryAll();
+//                return ls;
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
         return  null;
     }
 
@@ -309,6 +309,18 @@ public class Repository {
 
            String result= WebServiceGet.executeHttpGet(command);
            result=(String) JsonUtil.json2obj(result, String.class);
+           if(result=="success"){
+               driverDao = new SSDao<>(context, Driver.class);
+
+               try {
+                   Driver d=driverDao.queryById(1);
+                   d.setLoaded(1);
+                   driverDao.save(d);
+               } catch (SQLException e) {
+                   e.printStackTrace();
+               }
+           }
+
             return  result;
         }
 
@@ -372,6 +384,17 @@ public class Repository {
             System.out.println(command);
             String result = WebServiceGet.executeHttpGet(command);
             result = (String) JsonUtil.json2obj(result, String.class);
+            if(result=="success"){
+                driverDao = new SSDao<>(context, Driver.class);
+
+                try {
+                    Driver d=driverDao.queryById(1);
+                    d.setLoaded(1);
+                    driverDao.save(d);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
             return result;
         }
         return  "failure";
