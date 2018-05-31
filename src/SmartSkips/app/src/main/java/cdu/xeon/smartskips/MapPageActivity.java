@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -188,6 +189,24 @@ public static MapPageActivity instance =null;
         });
 
 
+        findViewById(R.id.navButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String startLat=""+lat;
+                String startlng=""+lng;
+                String desLat=""+landfillpos1.latitude;
+                String desLng=""+landfillpos1.longitude;
+
+
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?saddr="+startLat+","+startlng+"&daddr="+desLat+","+desLng));
+                startActivity(intent);
+
+
+
+            }
+        });
 
 
 
@@ -324,16 +343,16 @@ public static MapPageActivity instance =null;
             String title = "This is Title";
             String subTitle = "This is \nSubtitle";
             //Marker
-            MarkerOptions markerOpt = new MarkerOptions();
-            markerOpt.position(new LatLng(-12.366347, 130.877126))
-                    .title(title)
-                    .snippet(subTitle)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue));
-
-            //Set Custom InfoWindow Adapter
-            CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(MapPageActivity.this);
-            mMap.setInfoWindowAdapter(adapter);
-            mMap.addMarker(markerOpt).showInfoWindow();
+//            MarkerOptions markerOpt = new MarkerOptions();
+//            markerOpt.position(new LatLng(-12.366347, 130.877126))
+//                    .title(title)
+//                    .snippet(subTitle)
+//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue));
+//
+//            //Set Custom InfoWindow Adapter
+//            CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(MapPageActivity.this);
+//            mMap.setInfoWindowAdapter(adapter);
+//            mMap.addMarker(markerOpt).showInfoWindow();
 
 
             //landfill
@@ -368,8 +387,6 @@ public static MapPageActivity instance =null;
             String url = getRequestUrl(landfillpos1, skipRoute);
             cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections taskRequestDirections = new cdu.xeon.smartskips.MapPageActivity.TaskRequestDirections();
             taskRequestDirections.execute(url);
-
-
 
 
 
