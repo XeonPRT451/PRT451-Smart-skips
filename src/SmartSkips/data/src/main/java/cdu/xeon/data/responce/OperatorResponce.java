@@ -15,8 +15,7 @@ public class OperatorResponce {
     public Operator wrapper(){   //转化成自己的model
 
         Operator operator=new Operator();
-        operator.setName(name);
-        operator.setGender(gender);
+
 
         //TODO
         return operator;

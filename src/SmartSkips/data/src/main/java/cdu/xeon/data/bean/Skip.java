@@ -41,11 +41,14 @@ public class Skip implements Serializable {
     @DatabaseField(columnName = "current_capacity")
     private double currentCapacity;
 
-     @DatabaseField(canBeNull = true, foreign = true, columnName = "driver_id")
-     private Driver driver;
+    @DatabaseField(columnName = "longitudes")
+    private double longitude;
 
-    @DatabaseField(columnName = "dname")
-     private String dname;
+    @DatabaseField(columnName = "latitude")
+    private double latitude;
+
+    @DatabaseField(columnName = "count")
+    private int count;
      public Skip()
      {
      }
@@ -72,13 +75,6 @@ public class Skip implements Serializable {
         this.currentCapacity = currentCapacity;
     }
 
-    public Driver getDriver() {
-         return driver;
-     }
-
-     public void setDriver(Driver driver) {
-         this.driver = driver;
-     }
 
      public int getFull() {
          return full;
@@ -136,12 +132,28 @@ public class Skip implements Serializable {
         this.status = status;
     }
 
-    public String getDname() {
-        return dname;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setDname(String dname) {
-        this.dname = dname;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     @Override
@@ -155,8 +167,9 @@ public class Skip implements Serializable {
                 ", type=" + type +
                 ", capacity=" + capacity +
                 ", currentCapacity=" + currentCapacity +
-                ", driver=" + driver +
-                ", dname='" + dname + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", count=" + count +
                 '}';
     }
 }

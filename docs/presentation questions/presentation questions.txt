@@ -1,0 +1,18 @@
+how, why and what are you solving 
+-- no coverage issue - internet 
+-- sensor 
+-- interface design 
+-- usability 
+- shortest path
+- storage of driver
+- no complexity 
+- data base storage 
+-- market value 
+-- how can this be implemented 
+-- competition 
+-- cost of project 
+- implementation process 
+- api features 
+- further improvement 
+-- add on
+whats technology is available

@@ -1,1 +1,1 @@
-{"id":1,"username":"admin1","password":"23c7afef8b222e4cf4979cc6ffa77f20","nickname":"admin1","email":"admin1@admin.com","phone":"110","status":1,"createDate":1536503400000,"skip":null,"sname":null}
+{"id":1,"username":"admin1","password":null,"nickname":"admin1","email":"admin1@admin.com","phone":"110","status":1,"createDate":1536503400000,"loaded":0,"type":2,"trashamount":0.0}

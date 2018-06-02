@@ -1,1 +1,1 @@
-{"size":15,"offset":0,"total":1,"datas":[{"id":1,"name":"Darwin Landfill","address":"Darwin city","currentGWCapacity":50.0,"currentCWCapacity":50.0,"status":1,"gwcapacity":100.0,"cwcapacity":100.0}]}
+[{"id":1,"name":"Darwin Landfill","address":"Darwin landfill","currentGWCapacity":50.0,"currentCWCapacity":40.5,"status":1,"longitude":130.927287,"latitude":-12.417311,"gwcapacity":100.0,"cwcapacity":100.0}]

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="false" />
+
+</LinearLayout>
+
+
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:orientation="vertical">-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/skiptitle"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textStyle="bold"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/skipID"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:singleLine="false" />&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/state"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:singleLine="false" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/location"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:singleLine="false" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/infologo"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="49dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="21dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_gravity="center_vertical"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginLeft="8dip"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:src="@drawable/truck3" />&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;<Button&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="40dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="13dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_alignParentTop="true"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginLeft="60dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginTop="15dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:background="#373737"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:text="Cancel!"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textColor="#ffffff"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textSize="10dp" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<Button&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="40dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="20dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_alignParentTop="true"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginLeft="60dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginTop="15dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:text="Empty Skip!"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textColor="#ffffff"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textSize="10dp" />&ndash;&gt;-->
+
+
+<!--</LinearLayout>-->
+
+
+
+
+
+

@@ -19,7 +19,7 @@ public class WebServiceGet {
     }
 
 
-    private static String IP = "127.0.0.1:8888";
+    private static String IP = "192.168.253.1:8888";
 
 
     public static String executeHttpGet(String command) {

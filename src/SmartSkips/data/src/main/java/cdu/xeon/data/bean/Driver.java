@@ -40,10 +40,19 @@ public class Driver implements Serializable{
     @DatabaseField(columnName = "create_date")
     private Date createDate;
 
-    @DatabaseField(canBeNull = true, foreign = true, columnName = "sid")
-    private Skip skip;
+    @DatabaseField(columnName = "loaded")
+    private int loaded;
+    @DatabaseField(columnName = "type")
+    private int type;
+    @DatabaseField(columnName = "trashamount")
+    private double trashamount;
 
-    private String sname;
+    public Driver(int id, String nickname, String email, String phone) {
+        this.id = id;
+        this.nickname = nickname;
+        this.email = email;
+        this.phone = phone;
+    }
 
     public Driver() {
     }
@@ -75,13 +84,7 @@ public class Driver implements Serializable{
 
 
 
-    public Skip getSkip() {
-        return skip;
-    }
 
-    public void setSkip(Skip skip) {
-        this.skip = skip;
-    }
 
     public String getNickname() {
         return nickname;
@@ -123,12 +126,28 @@ public class Driver implements Serializable{
         this.createDate = createDate;
     }
 
-    public String getSname() {
-        return sname;
+    public int getLoaded() {
+        return loaded;
     }
 
-    public void setSname(String sname) {
-        this.sname = sname;
+    public void setLoaded(int loaded) {
+        this.loaded = loaded;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public double getTrashamount() {
+        return trashamount;
+    }
+
+    public void setTrashamount(double trashamount) {
+        this.trashamount = trashamount;
     }
 
     @Override
@@ -142,8 +161,9 @@ public class Driver implements Serializable{
                 ", phone='" + phone + '\'' +
                 ", status=" + status +
                 ", createDate=" + createDate +
-                ", skip=" + skip +
-                ", sname='" + sname + '\'' +
+                ", loaded=" + loaded +
+                ", type=" + type +
+                ", trashamount=" + trashamount +
                 '}';
     }
 }
